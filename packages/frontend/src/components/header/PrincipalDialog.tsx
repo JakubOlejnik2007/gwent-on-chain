@@ -9,10 +9,7 @@ type SessionDialogProps = {
   setIsOpen: (isOpen: boolean) => void;
 };
 
-export default function PrincipalDialog({
-  isOpen,
-  setIsOpen,
-}: SessionDialogProps) {
+const PrincipalDialog = ({ isOpen, setIsOpen }: SessionDialogProps) => {
   const { clear, identity } = useSiweIdentity();
 
   if (!identity) return null;
@@ -39,3 +36,5 @@ export default function PrincipalDialog({
     </Dialog>
   );
 }
+
+export default PrincipalDialog;

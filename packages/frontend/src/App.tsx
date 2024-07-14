@@ -3,6 +3,7 @@ import EditProfile from "./components/profile/EditProfile";
 import Header from "./components/header/Header";
 import { NoProfileMessage } from "./components/profile/NoProfileMessage";
 import GitHubIcon from "./components/GitHubIcon";
+import React from "react";
 
 function App() {
   return (

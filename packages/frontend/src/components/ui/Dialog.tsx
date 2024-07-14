@@ -13,12 +13,12 @@ type DialogProps = {
   children: React.ReactNode;
 };
 
-export default function Dialog({
+const Dialog = ({
   className,
   isOpen,
   setIsOpen,
   children,
-}: DialogProps) {
+}: DialogProps) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -60,3 +60,5 @@ export default function Dialog({
     </HeadlessDialog>
   );
 }
+
+export default Dialog;

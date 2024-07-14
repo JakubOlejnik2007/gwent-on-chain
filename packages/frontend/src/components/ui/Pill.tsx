@@ -5,7 +5,8 @@ type PillProps = {
   className?: string;
   children: React.ReactNode;
 };
-export default function Pill({ className, children }: PillProps) {
+
+const Pill = ({ className, children }: PillProps) => {
   className = twMerge("px-3 py-1 text-sm rounded-full bg-zinc-800", className);
 
   return (
@@ -16,3 +17,5 @@ export default function Pill({ className, children }: PillProps) {
     </div>
   );
 }
+
+export default Pill;

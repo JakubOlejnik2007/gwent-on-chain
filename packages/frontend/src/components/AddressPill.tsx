@@ -8,7 +8,7 @@ type AddressPillProps = {
   className?: string;
 };
 
-export default function AddressPill({ address, className }: AddressPillProps) {
+const AddressPill = ({ address, className }: AddressPillProps) => {
   if (!address) return null;
   return (
     <Pill className={className}>
@@ -17,3 +17,5 @@ export default function AddressPill({ address, className }: AddressPillProps) {
     </Pill>
   );
 }
+
+export default AddressPill;

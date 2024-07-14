@@ -6,10 +6,10 @@ type PrincipalPillProps = {
   className?: string;
 };
 
-export default function PrincipalPill({
+const PrincipalPill = ({
   principal,
   className,
-}: PrincipalPillProps) {
+}: PrincipalPillProps) => {
   return (
     <Pill className={className}>
       <img alt="ic" className="w-4 h-4" src="/ic.svg" />
@@ -17,3 +17,5 @@ export default function PrincipalPill({
     </Pill>
   );
 }
+
+export default PrincipalPill;
