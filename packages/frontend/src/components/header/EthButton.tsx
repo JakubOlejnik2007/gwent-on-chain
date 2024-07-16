@@ -31,12 +31,12 @@ export default function EthButton() {
 
   const buttonText = () => {
     if (isConnecting) {
-      return "Connecting...";
+      return "Łączenie…";
     }
     if (isConnected) {
       return address?.slice(0, 6) + "..." + address?.slice(-4);
     }
-    return "Connect";
+    return "Połącz";
   };
 
   return (

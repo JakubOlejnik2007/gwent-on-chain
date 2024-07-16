@@ -15,21 +15,18 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const { clear, isInitializing, identity, identityAddress } =
     useSiweIdentity();
 
-  // If the user is not connected, clear the session.
   useEffect(() => {
     if (!isConnected && identity) {
       clear();
     }
   }, [isConnected, clear, identity]);
 
-  // If user switches to an unsupported network, clear the session.
   useEffect(() => {
     if (chain?.id && !isChainIdSupported(chain.id)) {
       clear();
     }
   }, [chain, clear]);
 
-  // If the user switches to a different address, clear the session.
   useEffect(() => {
     if (identityAddress && address && address !== identityAddress) {
       clear();
@@ -40,7 +37,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     return null;
   }
 
-  // If wallet is not connected or there is no identity, show login page.
   if (!isInitializing && (!isConnected || !identity)) {
     return <LoginPage />;
   }

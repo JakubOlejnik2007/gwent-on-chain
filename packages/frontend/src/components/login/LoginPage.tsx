@@ -58,8 +58,9 @@ export default function LoginPage(): React.ReactElement {
         />
         <img alt="siwe" className="w-20 h-20 md:w-28 md:h-28" src="/siwe.svg" />
       </div>
-      <div className="px-10 text-2xl font-bold text-center md:text-5xl">
-        Internet Computer + React + Sign In With Ethereum
+      <div className="px-10 font-bold text-center">
+        <p className="text-2xl md:text-5xl">GWINT na blockchain</p>
+        <p className="text-l md:text-2xl">Użyj portfela Ethereum aby zalogować się do gry!</p>
       </div>
       <div className="w-80 md:w-96 border-zinc-700/50 border-[1px] bg-zinc-900 drop-shadow-xl rounded-3xl flex flex-col items-center py-5 mt-8 px-5 mx-10">
         <div className="flex flex-col items-center w-full gap-10 p-8">
@@ -77,7 +78,7 @@ export default function LoginPage(): React.ReactElement {
               )}
               {isConnected && !isChainIdSupported(chain?.id) && (
                 <Button disabled icon={faWaveSquare} variant="outline">
-                  Unsupported Network
+                  Sieć nie jest obsługiwana
                 </Button>
               )}
             </div>
@@ -87,7 +88,6 @@ export default function LoginPage(): React.ReactElement {
               2
             </div>
             <div>
-              {" "}
               <LoginButton />
             </div>
           </div>

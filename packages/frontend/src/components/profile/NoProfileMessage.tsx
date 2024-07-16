@@ -14,7 +14,6 @@ export function NoProfileMessage() {
   const { address } = useAccount();
   const { identity } = useSiweIdentity();
 
-  // Local state
   const [hasProfile, setHasProfile] = useState(true);
   const [loading, setLoading] = useState(true);
 

@@ -11,7 +11,7 @@ export default function LoginButton() {
   const { chain } = useNetwork();
   const { login, isLoggingIn, prepareLoginStatus } = useSiweIdentity();
 
-  const text = isLoggingIn ? "Signing in" : "Sign in";
+  const text = isLoggingIn ? "Rejestrowanie…" : "Zarejestruj się";
 
   const icon = isLoggingIn ? faCircleNotch : undefined;
 

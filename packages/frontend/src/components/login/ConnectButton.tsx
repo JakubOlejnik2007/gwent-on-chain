@@ -16,7 +16,7 @@ export default function ConnectButton() {
 
   const buttonIcon = isConnecting ? faCircleNotch : faEthereum;
 
-  const buttonText = isConnecting ? "Connecting" : "Connect wallet";
+  const buttonText = isConnecting ? "Łączenie…" : "Połącz portfel";
 
   return (
     <>

@@ -13,6 +13,7 @@ import { ReactNode } from "react";
 import { _SERVICE } from "../declarations/backend/backend.did";
 import toast from "react-hot-toast";
 import { useSiweIdentity } from "ic-use-siwe-identity";
+import React from "react";
 
 const actorContext = createActorContext<_SERVICE>();
 export const useActor = createUseActorHook<_SERVICE>(actorContext);
