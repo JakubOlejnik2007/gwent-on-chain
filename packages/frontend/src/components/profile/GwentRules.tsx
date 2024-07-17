@@ -1,5 +1,5 @@
 import React from 'react';
-import { gwentRules } from './gwentRules.helper';
+import { gwentRules } from '../../assets/gwentRules.helper';
 import RuleCard from './RuleCard';
 
 

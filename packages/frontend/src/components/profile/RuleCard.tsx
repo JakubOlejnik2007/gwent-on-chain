@@ -1,5 +1,5 @@
 import React from 'react';
-import { RuleCardProps } from './gwentRules.helper';
+import { RuleCardProps } from '../../assets/gwentRules.helper';
 
 const RuleCard = ({ruleNum, abstract, content}: RuleCardProps) => {
     return (
