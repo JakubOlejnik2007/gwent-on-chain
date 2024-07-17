@@ -1,5 +1,5 @@
 import React from 'react';
-import { neutralCards } from '../../assets/gwentCards.helper';
+import { northernRealmsCards } from '../../assets/gwentCards.helper';
 
 
 const DisplayCards = () => {
@@ -9,10 +9,10 @@ const DisplayCards = () => {
             <div className="text-2xl font-bold">Podstawowe zasady gry</div>
             <div className="flex items-stretch justify-center flex-wrap gap-5">
                 {
-                  neutralCards.map((card, index) => (
+                  northernRealmsCards.map((card, index) => (
                                       <div key={index}>
                                         <img className="w-20" src={card.imageUrl} />
-                                        <p>{JSON.stringify(card)}</p>
+                                        <p className={card.isHero ? "text-orange-900" : ""}>{JSON.stringify(card)}</p>
                                       </div>
                                     ))
                 }
