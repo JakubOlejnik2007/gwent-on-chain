@@ -6,6 +6,7 @@ import GitHubIcon from "./components/GitHubIcon";
 import React from "react";
 import GwentRules from "./components/profile/GwentRules";
 import DisplayCards from "./components/game/DisplayCards";
+import GameMeta from "./components/game/GameMeta";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <div className="flex flex-col items-center w-full gap-10 p-5">
         <div className="h-5 md:h-28" />
+        <GameMeta />
         <DisplayCards />
         <GwentRules />
         <NoProfileMessage />

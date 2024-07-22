@@ -14,6 +14,7 @@ type GwentCard = {
     ability: GwentCardAbility,
 }
 
+// 0 - melee, 1 - ranged, 2 - siege
 interface Player {
     id: string,
     name: string,

@@ -288,7 +288,7 @@ export const neutralCards: GwentCard[] = [
         isWeather: false,
         ability: null
     }
-]
+] as const;
 
 export const northernRealmsCards: GwentCard[] = [
     ...neutralCards,
@@ -580,4 +580,4 @@ export const northernRealmsCards: GwentCard[] = [
         isWeather: false,
         ability: null
     },
-]
+] as const;
