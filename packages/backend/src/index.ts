@@ -7,6 +7,7 @@ import {
 import { get_my_profile } from "./service/get_my_profile";
 import { list_profiles } from "./service/list_profiles";
 import { save_my_profile } from "./service/save_my_profile";
+import { list_games_for_user } from "./service/current_matches";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -16,4 +17,5 @@ export default Canister({
   get_my_profile,
   save_my_profile,
   list_profiles,
+  list_games_for_user
 });
