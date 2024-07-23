@@ -4,5 +4,5 @@ const GameKey = text;
 
 type GameKey = typeof GameKey.tsType;
 
-let gameBoardStore = StableBTreeMap<GameKey, GameBoardState>(0);
+let gameBoardStore = StableBTreeMap<GameKey, GameBoardState>(1);
 export default gameBoardStore;

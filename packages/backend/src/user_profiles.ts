@@ -12,4 +12,4 @@ export const UserProfile = Record({
 
 export type UserProfile = typeof UserProfile.tsType;
 
-export let profileStore = StableBTreeMap<UserKey, UserProfile>(0);
+export const profileStore = StableBTreeMap<UserKey, UserProfile>(0);

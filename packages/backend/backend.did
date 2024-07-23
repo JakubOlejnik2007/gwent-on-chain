@@ -2,6 +2,7 @@ service: (principal) -> {
     clear_game_board_store: () -> (variant {Ok:text; Err:text});
     create_game: () -> (variant {Ok:text; Err:text});
     get_my_profile: () -> (variant {Ok:record {avatar_url:text; name:text; address:text}; Err:text}) query;
+    join_game: (text) -> (variant {Ok:text; Err:text});
     list_all_games: () -> (variant {Ok:vec text; Err:text}) query;
     list_games_for_user: (text) -> (variant {Ok:vec text; Err:text}) query;
     list_profiles: () -> (variant {Ok:vec record {text; record {avatar_url:text; name:text; address:text}}; Err:text}) query;
