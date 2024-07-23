@@ -14,12 +14,12 @@ export interface Player {
     id: string,
     name: string,
     units: [GwentCard[], GwentCard[], GwentCard[]],
-    commander: GwentCard,
+    commander: GwentCard | undefined,
     rejected: GwentCard[],
     nondrawed: GwentCard[]
 }
 
 export interface GameBoardState {
-    players: [Player, Player]
+    players: [Player, Player | undefined]
     weatherEffectRow: GwentRow[]
 }
