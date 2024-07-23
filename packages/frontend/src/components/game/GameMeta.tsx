@@ -4,8 +4,9 @@ import { useActor } from "../../ic/Actors";
 import CreateGame from "./CreateGame";
 
 interface PlayerData {
-    id: string | undefined,
+    address: string | undefined,
     name: string | undefined,
+    avatar_url: string | undefined,
     units: [GwentCard[], GwentCard[], GwentCard[]],
     commander: GwentCard | undefined
 }
@@ -30,14 +31,16 @@ type GameMetaContextType = {
 const testObject: GameMetaContextData = {
     GameKey: "asdas",
     opponentData: {
-        id: "123",
+        address: "123",
         name: "opponent",
+        avatar_url: "https://tenco.waw.pl/img.png",
         units: [[], [], []],
         commander: undefined
     },
     myData: {
-        id: "456",
+        address: "456",
         name: "player1",
+        avatar_url: "https://tenco.waw.pl/img.png",
         units: [[], [], []],
         commander: undefined,
         rejected: [],

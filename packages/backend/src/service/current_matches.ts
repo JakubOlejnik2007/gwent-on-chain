@@ -17,7 +17,7 @@ export const list_games_for_user = query(
         gameBoardStore.keys().forEach((key: string) => {
             const game = gameBoardStore.get(key).Some;
             if (game) {
-                const isPlayerInGame = game.players.some(player => player !== undefined && player.id === userId);
+                const isPlayerInGame = game.players.some(player => player !== undefined && player.address === userId);
                 if (isPlayerInGame) {
                     games.push(key);
                 }

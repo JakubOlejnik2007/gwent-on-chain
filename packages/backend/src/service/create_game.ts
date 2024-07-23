@@ -18,8 +18,9 @@ const create_game = update(
         const gameBoardState: GameBoardState = {
             players: [
                 {
-                    id: ic.caller().toString(),
+                    address: ic.caller().toString(),
                     name: callerData.Some.name,
+                    avatar_url: callerData.Some.avatar_url,
                     units: [[], [], []],
                     commander: undefined,
                     rejected: [],

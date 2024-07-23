@@ -11,8 +11,9 @@ export type GwentCard = {
 }
 
 export interface Player {
-    id: string,
+    address: string,
     name: string,
+    avatar_url: string,
     units: [GwentCard[], GwentCard[], GwentCard[]],
     commander: GwentCard | undefined,
     rejected: GwentCard[],
