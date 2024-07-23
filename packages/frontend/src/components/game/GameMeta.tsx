@@ -4,13 +4,13 @@ import { useActor } from "../../ic/Actors";
 import CreateGame from "./CreateGame";
 
 interface PlayerData {
-    id: string,
-    name: string
+    id: string | undefined,
+    name: string | undefined,
+    units: [GwentCard[], GwentCard[], GwentCard[]],
+    commander: GwentCard | undefined
 }
 
 interface MyData extends PlayerData {
-    units: [GwentCard[], GwentCard[], GwentCard[]],
-    commander: GwentCard | null,
     rejected: GwentCard[],
     nondrawed: GwentCard[]
 }
@@ -31,13 +31,15 @@ const testObject: GameMetaContextData = {
     GameKey: "asdas",
     opponentData: {
         id: "123",
-        name: "opponent"
+        name: "opponent",
+        units: [[], [], []],
+        commander: undefined
     },
     myData: {
         id: "456",
         name: "player1",
         units: [[], [], []],
-        commander: null,
+        commander: undefined,
         rejected: [],
         nondrawed: []
     },

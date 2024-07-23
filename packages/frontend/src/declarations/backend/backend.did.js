@@ -1,5 +1,15 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
+    'create_game' : IDL.Func(
+        [],
+        [
+          IDL.Variant({
+            'Ok' : IDL.Text,
+            'Err' : IDL.Text,
+          }),
+        ],
+        [],
+      ),
     'get_my_profile' : IDL.Func(
         [],
         [
@@ -9,6 +19,16 @@ export const idlFactory = ({ IDL }) => {
               'name' : IDL.Text,
               'address' : IDL.Text,
             }),
+            'Err' : IDL.Text,
+          }),
+        ],
+        ['query'],
+      ),
+    'list_games_for_user' : IDL.Func(
+        [IDL.Text],
+        [
+          IDL.Variant({
+            'Ok' : IDL.Vec(IDL.Text),
             'Err' : IDL.Text,
           }),
         ],
@@ -49,4 +69,5 @@ export const idlFactory = ({ IDL }) => {
       ),
   });
 };
+
 export const init = ({ IDL }) => { return [IDL.Principal]; };

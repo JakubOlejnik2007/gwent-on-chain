@@ -25,6 +25,11 @@ export interface _SERVICE {
     { 'Ok' : { 'avatar_url' : string, 'name' : string, 'address' : string } } |
       { 'Err' : string }
   >,
+  'create_game' : ActorMethod<
+    [],
+    { 'Ok' : string } |
+      { 'Err' : string }
+  >,
 }
 export declare const idlFactory: IDL.InterfaceFactory;
-export declare const init: ({ IDL }: { IDL: IDL }) => IDL.Type[];
+export declare const init: ({ IDL }: { IDL: IDL.Type }) => IDL.Type[];

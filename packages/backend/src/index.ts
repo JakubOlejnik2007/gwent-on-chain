@@ -7,7 +7,8 @@ import {
 import { get_my_profile } from "./service/get_my_profile";
 import { list_profiles } from "./service/list_profiles";
 import { save_my_profile } from "./service/save_my_profile";
-import { list_games_for_user } from "./service/current_matches";
+import { clear_game_board_store, list_all_games, list_games_for_user } from "./service/current_matches";
+import create_game from "./service/create_game";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -17,5 +18,8 @@ export default Canister({
   get_my_profile,
   save_my_profile,
   list_profiles,
-  list_games_for_user
+  list_games_for_user,
+  create_game,
+  list_all_games,
+  clear_game_board_store
 });
