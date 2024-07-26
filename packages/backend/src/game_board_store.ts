@@ -1,8 +1,5 @@
-import { StableBTreeMap, text } from "azle";
+import { StableBTreeMap } from "azle";
 import { GameBoardState } from "./types";
-const GameKey = text;
 
-type GameKey = typeof GameKey.tsType;
-
-let gameBoardStore = StableBTreeMap<GameKey, GameBoardState>(1);
+let gameBoardStore = StableBTreeMap<string, GameBoardState>(1);
 export default gameBoardStore;
