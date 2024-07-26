@@ -1,33 +1,8 @@
 import React, { createContext, ReactNode, useState } from "react";
-import { GwentCard } from "../../assets/gwentTypes.helper";
 import { useActor } from "../../ic/Actors";
 import CreateGame from "./CreateGame";
-
-interface PlayerData {
-    address: string | undefined,
-    name: string | undefined,
-    avatar_url: string | undefined,
-    units: [GwentCard[], GwentCard[], GwentCard[]],
-    commander: GwentCard | undefined
-}
-
-interface MyData extends PlayerData {
-    rejected: GwentCard[],
-    nondrawed: GwentCard[]
-}
-
-type GameMetaContextData = {
-    GameKey: string;
-    opponentData: PlayerData | undefined;
-    myData: MyData | undefined;
-    wchichPlayerTurn: string | undefined;
-}
-
-type GameMetaContextType = {
-    data: GameMetaContextData | null;
-    assignGameKeyToData: (GameKey: string) => void;
-    
-}
+import Game from "./Game";
+import { GameMetaContextData, GameMetaContextType } from "./gamesTypes.helper";
 
 const testObject: GameMetaContextData = {
     GameKey: "asdas",
@@ -41,13 +16,13 @@ const testObject: GameMetaContextData = {
     myData: {
         address: "456",
         name: "player1",
-        avatar_url: "https://tenco.waw.pl/img.png",
+        avatar_url: "https://tenco.waw.pl/img.",
         units: [[], [], []],
         commander: undefined,
         rejected: [],
         nondrawed: []
     },
-    wchichPlayerTurn: "player1"
+    wchichPlayerTurn: undefined,
 };
 
 export const GameMetaContext = createContext<GameMetaContextType>({
@@ -58,7 +33,7 @@ export const GameMetaContext = createContext<GameMetaContextType>({
 const GameMeta = () => {
     const { actor }= useActor()
     const [data, setData] = useState<GameMetaContextData | null>(
-        null
+        testObject
     )
 
     const assignGameKeyToData = (GameKey: string) => {
@@ -70,12 +45,10 @@ const GameMeta = () => {
         })
     }
     
-
-
     return (
         <>
             <GameMetaContext.Provider value={{ data, assignGameKeyToData }}>
-                { data === null ? <CreateGame /> : `<Game /> ${data.GameKey}` }
+                { data === null ? <CreateGame /> : <Game /> }
             </GameMetaContext.Provider>
         </>
     )
