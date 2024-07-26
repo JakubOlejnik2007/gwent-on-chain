@@ -3,6 +3,7 @@ import { GameMetaContext } from "./GameMeta";
 import Button from "../ui/Button";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import UserProfileGame from "./UserProfileGame";
+import Pill from "../ui/Pill";
 
 const Game = () => {
 
@@ -20,11 +21,16 @@ const Game = () => {
     );
 
     if (data.opponentData === undefined || data.myData === undefined) return (
-        <Button
-            className="w-44"
-            icon={faCircleNotch}
-            spin
-        >Waiting for opponent to join</Button>
+        <>
+
+            <Button
+                className="w-44"
+                icon={faCircleNotch}
+                spin
+            >Waiting for opponent to join</Button>
+            <Pill className="bg-zinc-900 p-3">Id gry: {data.GameKey}</Pill>
+        </>
+
     );
 
     return (
