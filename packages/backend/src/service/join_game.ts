@@ -25,7 +25,11 @@ const join_game = update(
             return { Err: "Game not found" };
         }
 
+
         const game = gameOption.Some;
+
+        if(callerAddress === game.players[0].address) throw new Error("Player already joined the game");
+        if(game.players.length >= 2) throw new Error("Game already has 2 players");
 
         const player: Player = {
             address: callerAddress,

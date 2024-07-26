@@ -18,13 +18,14 @@ interface MyData extends PlayerData {
 
 type GameMetaContextData = {
     GameKey: string;
-    opponentData: PlayerData;
-    myData: MyData
-    wchichPlayerTurn: string;
+    opponentData: PlayerData | undefined;
+    myData: MyData | undefined;
+    wchichPlayerTurn: string | undefined;
 }
 
 type GameMetaContextType = {
     data: GameMetaContextData | null;
+    assignGameKeyToData: (GameKey: string) => void;
     
 }
 
@@ -49,20 +50,32 @@ const testObject: GameMetaContextData = {
     wchichPlayerTurn: "player1"
 };
 
-export const GameMetaContext = createContext<GameMetaContextType | null>(null);
+export const GameMetaContext = createContext<GameMetaContextType>({
+    data: null,
+    assignGameKeyToData: () => {}
+});
 
 const GameMeta = () => {
     const { actor }= useActor()
-    let [data, setData] = useState<GameMetaContextData | null>(
-        null //testObject
+    const [data, setData] = useState<GameMetaContextData | null>(
+        null
     )
+
+    const assignGameKeyToData = (GameKey: string) => {
+        setData({
+            GameKey: GameKey,
+            opponentData: undefined,
+            myData: undefined,
+            wchichPlayerTurn: undefined
+        })
+    }
     
 
 
     return (
         <>
-            <GameMetaContext.Provider value={{ data }}>
-                { data === null ? <CreateGame /> : "<Game />" }
+            <GameMetaContext.Provider value={{ data, assignGameKeyToData }}>
+                { data === null ? <CreateGame /> : `<Game /> ${data.GameKey}` }
             </GameMetaContext.Provider>
         </>
     )
