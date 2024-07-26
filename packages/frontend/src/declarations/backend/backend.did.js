@@ -97,6 +97,16 @@ export const idlFactory = ({ IDL }) => {
       ],
       []
     ),
+    'get_game_state' : IDL.Func(
+      [IDL.Text],
+      [
+        IDL.Variant({
+          'Ok' : IDL.Text,
+          'Err' : IDL.Text,
+        }),
+      ],
+      []
+    ),
   });
 };
 

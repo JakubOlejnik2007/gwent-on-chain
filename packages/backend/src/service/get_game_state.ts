@@ -54,7 +54,6 @@ const get_game_state = update([text],
                     rejected: player2.rejected,
                     nondrawed: player2.nondrawed
                 }
-            } else {
                 opponentData = {
                     address: player1.address,
                     name: player1.name,

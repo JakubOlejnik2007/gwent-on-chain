@@ -29,7 +29,7 @@ const join_game = update(
         const game = gameOption.Some;
 
         if(callerAddress === game.players[0].address) throw new Error("Player already joined the game");
-        if(game.players.length >= 2) throw new Error("Game already has 2 players");
+        if(game.players[1] !== null) throw new Error("Game already has 2 players");
 
         const player: Player = {
             address: callerAddress,
@@ -45,7 +45,7 @@ const join_game = update(
 
         gameBoardStore.insert(gameId, game);
 
-        return { Ok: `Player added/updated in game ${gameId}` };
+        return { Ok: gameId };
     }
 );
 

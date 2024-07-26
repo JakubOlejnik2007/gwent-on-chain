@@ -44,6 +44,11 @@ export interface _SERVICE {
     { 'Ok' : { 'avatar_url' : string, 'name' : string, 'address' : string } } |
     { 'Err' : string }
   >,
+  'get_game_state' : ActorMethod<
+    [string],
+    { 'Ok' : string } |
+    { 'Err' : string }
+  >,
 }
 
 export declare const idlFactory: IDL.InterfaceFactory;
