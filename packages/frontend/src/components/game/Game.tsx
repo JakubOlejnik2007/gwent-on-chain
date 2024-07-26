@@ -24,7 +24,7 @@ const Game = () => {
             className="w-44"
             icon={faCircleNotch}
             spin
-        />
+        >Waiting for opponent to join</Button>
     );
 
     return (

@@ -17,7 +17,7 @@ export type GameMetaContextData = {
     GameKey: string;
     opponentData: PlayerData | undefined;
     myData: MyData | undefined;
-    wchichPlayerTurn: string | undefined;
+    whichPlayerTurn: string | undefined;
 }
 
 export type GameMetaContextType = {

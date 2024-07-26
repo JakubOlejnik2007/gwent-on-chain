@@ -22,7 +22,7 @@ const testObject: GameMetaContextData = {
         rejected: [],
         nondrawed: []
     },
-    wchichPlayerTurn: undefined,
+    whichPlayerTurn: undefined,
 };
 
 export const GameMetaContext = createContext<GameMetaContextType>({
@@ -33,7 +33,7 @@ export const GameMetaContext = createContext<GameMetaContextType>({
 const GameMeta = () => {
     const { actor }= useActor()
     const [data, setData] = useState<GameMetaContextData | null>(
-        testObject
+        null
     )
 
     const assignGameKeyToData = (GameKey: string) => {
@@ -41,7 +41,7 @@ const GameMeta = () => {
             GameKey: GameKey,
             opponentData: undefined,
             myData: undefined,
-            wchichPlayerTurn: undefined
+            whichPlayerTurn: undefined
         })
     }
     
