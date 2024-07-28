@@ -6,7 +6,7 @@ import AddressPill from "../AddressPill";
 import PrincipalPill from "../PrincipalPill";
 
 
-const UserProfileGame = ({ address, name, avatar_url }: PlayerData) => {
+const UserProfileGame = ({ address, name, avatar_url, ready }: PlayerData) => {
     const [imageError, setImageError] = useState<boolean>(false);
 
     const handleImageError = () => {
@@ -36,6 +36,9 @@ const UserProfileGame = ({ address, name, avatar_url }: PlayerData) => {
                 </div>
                 <div className="text-xs text-zinc-500">
                     <PrincipalPill principal={address} />
+                </div>
+                <div className="text-sm text-center font-bold text-zinc-400">
+                    {ready ? "Gotowy" : "Oczekiwanie…"  }
                 </div>
             </div>
         </div>
