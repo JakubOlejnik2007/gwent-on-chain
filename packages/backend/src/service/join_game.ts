@@ -38,7 +38,8 @@ const join_game = update(
             units: [[], [], []],
             commander: undefined,
             rejected: [],
-            nondrawed: []
+            nondrawed: [],
+            pickable: [],
         };
 
         game.players[1] = player;

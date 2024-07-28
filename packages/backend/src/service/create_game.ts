@@ -24,7 +24,8 @@ const create_game = update(
                     units: [[], [], []],
                     commander: undefined,
                     rejected: [],
-                    nondrawed: []
+                    nondrawed: [],
+                    pickable: [],
                 }, 
                 undefined
             ],

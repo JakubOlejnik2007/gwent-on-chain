@@ -1,5 +1,6 @@
 export type GwentRow = "melee" | "ranged" | "siege" | "every";
-export type GwentCardAbility = null | "spy" | "bond" | "brotherhood" | "morale" | "resurrection" | "horn" | "agility" | "purge" | "dummy"
+export type GwentCardAbility = null | "spy" | "bond" | "brotherhood" | "morale" | "resurrection" | "horn" | "agility" | "purge" | "dummy";
+export type GwentDeck = "Northern Realms" | "Scoia'tael" | "Monsters" | "Nilfgaard";
 
 export type GwentCard = {
     row: GwentRow,
@@ -17,7 +18,8 @@ export interface Player {
     units: [GwentCard[], GwentCard[], GwentCard[]],
     commander: GwentCard | undefined,
     rejected: GwentCard[],
-    nondrawed: GwentCard[]
+    nondrawed: GwentCard[],
+    pickable: GwentCard[],
 }
 
 export interface GameBoardState {
