@@ -17,7 +17,8 @@ export interface Player {
     units: [GwentCard[], GwentCard[], GwentCard[]],
     commander: GwentCard | undefined,
     rejected: GwentCard[],
-    nondrawed: GwentCard[]
+    nondrawed: GwentCard[],
+    ready: boolean;
 }
 
 export interface GameBoardState {
@@ -30,7 +31,8 @@ export interface PlayerData {
     name: string | undefined,
     avatar_url: string | undefined,
     units: [GwentCard[], GwentCard[], GwentCard[]],
-    commander: GwentCard | undefined
+    commander: GwentCard | undefined,
+    ready: boolean;
 }
 
 export interface MyData extends PlayerData {

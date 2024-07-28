@@ -32,7 +32,8 @@ const get_game_state = update([text],
             units: player1.units,
             commander: player1.commander,
             rejected: player1.rejected,
-            nondrawed: player1.nondrawed
+            nondrawed: player1.nondrawed,
+            ready: player1.ready
         };
         if (player2) {
             opponentData = {
@@ -41,6 +42,7 @@ const get_game_state = update([text],
                 avatar_url: player2.avatar_url,
                 units: player2.units,
                 commander: player2.commander,
+                ready: player2.ready
             };
         }
         if (player2) {
@@ -52,14 +54,16 @@ const get_game_state = update([text],
                     units: player2.units,
                     commander: player2.commander,
                     rejected: player2.rejected,
-                    nondrawed: player2.nondrawed
+                    nondrawed: player2.nondrawed,
+                    ready: player2.ready
                 }
                 opponentData = {
                     address: player1.address,
                     name: player1.name,
                     avatar_url: player1.avatar_url,
                     units: player1.units,
-                    commander: player1.commander
+                    commander: player1.commander,
+                    ready: player1.ready
                 }
             }
         } else opponentData = undefined;
