@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import UserProfileGame from "./UserProfileGame";
 import Pill from "../ui/Pill";
+import SelectDeck from "./SelectDeck";
 
 const Game = () => {
 
@@ -39,6 +40,7 @@ const Game = () => {
                 <UserProfileGame {...data.myData} />
                 <UserProfileGame {...data.opponentData} />
             </div>
+            {!data.myData.ready && <SelectDeck />}
         </div>
     );
 }

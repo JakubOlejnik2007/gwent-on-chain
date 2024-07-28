@@ -12,6 +12,7 @@ const testObject: GameMetaContextData = {
         avatar_url: "https://tenco.waw.pl/img.png",
         units: [[], [], []],
         commander: undefined,
+        ready: false,
     },
     myData: {
         address: "456",
@@ -21,6 +22,7 @@ const testObject: GameMetaContextData = {
         commander: undefined,
         rejected: [],
         nondrawed: [],
+        ready: true,
     },
     whichPlayerTurn: undefined,
 };
@@ -51,6 +53,7 @@ const GameMeta = () => {
 
                     if (updatedData === undefined) throw new Error("Undefined object");
                     if ("Err" in updatedData) throw new Error(updatedData.Err);
+                    console.log(JSON.parse(updatedData.Ok))
                     setData((prevData) => ({
                         ...prevData,
                         ...JSON.parse(updatedData.Ok),

@@ -5,7 +5,8 @@ export interface PlayerData {
     name: string | undefined,
     avatar_url: string | undefined,
     units: [GwentCard[], GwentCard[], GwentCard[]],
-    commander: GwentCard | undefined
+    commander: GwentCard | undefined,
+    ready: boolean
 }
 
 export interface MyData extends PlayerData {
