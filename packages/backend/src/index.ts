@@ -11,6 +11,7 @@ import { clear_game_board_store, list_all_games, list_games_for_user } from "./s
 import create_game from "./service/create_game";
 import join_game from "./service/join_game";
 import get_game_state from "./service/get_game_state";
+import get_deck from "./service/get_deck";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -25,5 +26,6 @@ export default Canister({
   list_all_games,
   clear_game_board_store,
   join_game,
-  get_game_state
+  get_game_state,
+  get_deck,
 });
