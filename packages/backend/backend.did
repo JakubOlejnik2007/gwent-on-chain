@@ -1,4 +1,5 @@
 service: (principal) -> {
+    change_readiness: (text) -> (variant {Ok:text; Err:text});
     clear_game_board_store: () -> (variant {Ok:text; Err:text});
     create_game: () -> (variant {Ok:text; Err:text});
     get_deck: (text, text) -> (variant {Ok:text; Err:text});

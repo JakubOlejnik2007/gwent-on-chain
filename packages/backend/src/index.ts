@@ -12,6 +12,7 @@ import create_game from "./service/create_game";
 import join_game from "./service/join_game";
 import get_game_state from "./service/get_game_state";
 import get_deck from "./service/get_deck";
+import change_readiness from "./service/change_readiness";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -28,4 +29,5 @@ export default Canister({
   join_game,
   get_game_state,
   get_deck,
+  change_readiness
 });
