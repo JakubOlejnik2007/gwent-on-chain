@@ -107,6 +107,16 @@ export const idlFactory = ({ IDL }) => {
       ],
       []
     ),
+    'get_deck' : IDL.Func(
+      [IDL.Text, IDL.Text],
+      [
+        IDL.Variant({
+          'Ok' : IDL.Text,
+          'Err' : IDL.Text,
+        }),
+      ],
+      []
+    ),
   });
 };
 

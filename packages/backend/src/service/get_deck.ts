@@ -47,8 +47,9 @@ const get_deck = update([text, text],
             cards = cards.filter(c => c!== card);
         }
 
-        (game.players[playerIndex] as Player).pickable = selectedCards
-
+        (game.players[playerIndex] as Player).pickable = cards;
+        (game.players[playerIndex] as Player).nondrawed = selectedCards;
+        gameBoardStore.insert(gameKey, game);
         return { Ok: "Cards are chosen" };
     }
 )

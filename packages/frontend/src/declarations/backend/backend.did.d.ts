@@ -48,6 +48,11 @@ export interface _SERVICE {
     [string],
     { 'Ok' : string } |
     { 'Err' : string }
+
+  >,'get_deck' : ActorMethod<
+    [string, string],
+    { 'Ok' : string } |
+    { 'Err' : string }
   >,
 }
 
