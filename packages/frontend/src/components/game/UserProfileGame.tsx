@@ -38,7 +38,7 @@ const UserProfileGame = ({ address, name, avatar_url, ready }: PlayerData) => {
                     <PrincipalPill principal={address} />
                 </div>
                 <div className="text-sm text-center font-bold text-zinc-400">
-                    {ready ? "Gotowy" : "Oczekiwanie…"  }
+                    {ready ? "Gotowy" : "Dobiera karty…"  }
                 </div>
             </div>
         </div>

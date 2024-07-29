@@ -28,8 +28,8 @@ const join_game = update(
 
         const game = gameOption.Some;
 
-        if(callerAddress === game.players[0].address) throw new Error("Player already joined the game");
-        if(game.players[1] !== null) throw new Error("Game already has 2 players");
+        if(callerAddress === game.players[0].address) return { Ok: gameId };;
+        if(game.players[1] !== null && game.players[1]?.address !== callerAddress) throw new Error("Game already has 2 players");
 
         const player: Player = {
             address: callerAddress,
