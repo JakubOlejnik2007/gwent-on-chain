@@ -26,7 +26,8 @@ const create_game = update(
                     rejected: [],
                     nondrawed: [],
                     pickable:[],
-                    ready: false
+                    ready: false,
+                    cardsChanged: 0
                 }, 
                 undefined
             ],

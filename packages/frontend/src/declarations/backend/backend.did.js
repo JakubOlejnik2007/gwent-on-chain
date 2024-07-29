@@ -127,6 +127,16 @@ export const idlFactory = ({ IDL }) => {
       ],
       []
     ),
+    'change_cards' : IDL.Func(
+      [IDL.Text, IDL.Nat32],
+      [
+        IDL.Variant({
+          'Ok' : IDL.Text,
+          'Err' : IDL.Text,
+        }),
+      ],
+      []
+    ),
   });
 };
 

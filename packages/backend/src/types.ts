@@ -21,6 +21,7 @@ export interface Player {
     nondrawed: GwentCard[],
     pickable: GwentCard[],
     ready: boolean;
+    cardsChanged: 0 | 1 | 2;
 }
 
 export interface GameBoardState {
@@ -40,6 +41,7 @@ export interface PlayerData {
 export interface MyData extends PlayerData {
     rejected: GwentCard[],
     nondrawed: GwentCard[]
+    cardsChanged: 0 | 1 | 2;
 }
 
 export type GameMetaContextData = {

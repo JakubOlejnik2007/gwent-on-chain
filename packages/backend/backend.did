@@ -1,4 +1,5 @@
 service: (principal) -> {
+    change_cards: (text, nat32) -> (variant {Ok:text; Err:text});
     change_readiness: (text) -> (variant {Ok:text; Err:text});
     clear_game_board_store: () -> (variant {Ok:text; Err:text});
     create_game: () -> (variant {Ok:text; Err:text});

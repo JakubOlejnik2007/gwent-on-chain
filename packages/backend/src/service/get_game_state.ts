@@ -33,7 +33,8 @@ const get_game_state = update([text],
             commander: player1.commander,
             rejected: player1.rejected,
             nondrawed: player1.nondrawed,
-            ready: player1.ready
+            ready: player1.ready,
+            cardsChanged: player1.cardsChanged
         };
         if (player2) {
             opponentData = {
@@ -55,7 +56,8 @@ const get_game_state = update([text],
                     commander: player2.commander,
                     rejected: player2.rejected,
                     nondrawed: player2.nondrawed,
-                    ready: player2.ready
+                    ready: player2.ready,
+                    cardsChanged: player2.cardsChanged
                 }
                 opponentData = {
                     address: player1.address,

@@ -23,6 +23,7 @@ const testObject: GameMetaContextData = {
         rejected: [],
         nondrawed: [],
         ready: true,
+        cardsChanged: 1,
     },
     whichPlayerTurn: undefined,
 };

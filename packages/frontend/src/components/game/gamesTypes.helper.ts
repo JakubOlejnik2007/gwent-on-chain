@@ -11,7 +11,8 @@ export interface PlayerData {
 
 export interface MyData extends PlayerData {
     rejected: GwentCard[],
-    nondrawed: GwentCard[]
+    nondrawed: GwentCard[],
+    cardsChanged: number;
 }
 
 export type GameMetaContextData = {
