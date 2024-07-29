@@ -54,6 +54,11 @@ export interface _SERVICE {
     { 'Ok' : string } |
     { 'Err' : string }
   >,
+  'change_readiness' : ActorMethod<
+    [string],
+    { 'Ok' : string } |
+    { 'Err' : string }
+  >,
 }
 
 export declare const idlFactory: IDL.InterfaceFactory;

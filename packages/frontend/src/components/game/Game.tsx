@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GameMetaContext } from "./GameMeta";
 import Button from "../ui/Button";
-import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import UserProfileGame from "./UserProfileGame";
 import Pill from "../ui/Pill";
 import SelectDeck from "./SelectDeck";
@@ -51,7 +51,13 @@ const Game = () => {
                         )
                     }) : ""
                 }</div>
-            <div className="flex"><Button></Button></div>
+            {!data.myData.ready && <div className="flex">
+                <Button
+                    icon={faCheckCircle}
+                >
+                    Gotowość
+                </Button>
+            </div>}
         </div>
     );
 }

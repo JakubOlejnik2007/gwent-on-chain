@@ -117,6 +117,16 @@ export const idlFactory = ({ IDL }) => {
       ],
       []
     ),
+    'change_readiness' : IDL.Func(
+      [IDL.Text],
+      [
+        IDL.Variant({
+          'Ok' : IDL.Text,
+          'Err' : IDL.Text,
+        }),
+      ],
+      []
+    ),
   });
 };
 
