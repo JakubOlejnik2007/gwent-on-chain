@@ -12,20 +12,40 @@ type DisplayRowProps = {
         cardImage: string,
         row: string
     },
-    handleSelectCard: (card: GwentCard) => void
+    rowIndex: number,
+    site: "opponent" | "me",
+    selectedCardIndex: number | null,
+    handlePlayCard: (selectedCardIndex: number, row: string) => void
 }
 
-const DisplayRow = ({ cards, colorPallete, handleSelectCard }: DisplayRowProps) => {
+const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard }: DisplayRowProps) => {
+    const { data } = useContext(GameMetaContext);
+
+    if (!data) return <></>;
+    let isSelectedCardPlacable = false;
+    if (selectedCardIndex !== null) {
+        const selectedCard = data.myData?.nondrawed[selectedCardIndex];
+        isSelectedCardPlacable = (selectedCard?.row === "every" && !selectedCard?.isWeather && site === "me") || (site === "me"
+            && (
+                (selectedCard?.row == "melee" && rowIndex === 0) ||
+                (selectedCard?.row == "ranged" && rowIndex === 1) ||
+                (selectedCard?.row == "siege" && rowIndex === 2)
+            ));
+    }
+
     const sumFromRow = cards.reduce((acc, card) => acc + card.baseStrength, 0);
+
     return <>
         <Pill className={colorPallete.pill}><p className={colorPallete.pillParagraph}>{sumFromRow}</p></Pill>
-        <div className={colorPallete.row}>
+        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[1px] border-yellow-300" : "")}
+            onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, (data.myData?.nondrawed[selectedCardIndex] as GwentCard).row) : () => { }}
+        >
             {cards.map((card, colIndex) => {
                 return (
                     <img key={colIndex} className={colorPallete.cardImage} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
                 )
             })}
-        </div>
+        </div >
     </>;
 }
 
@@ -33,10 +53,14 @@ const GameBoard = () => {
 
     const { data } = useContext(GameMetaContext);
 
-    const [selectedCard, setSelectedCard] = React.useState<GwentCard | null>(null);
+    const [selectedCard, setSelectedCard] = React.useState<number | null>(null);
     if (!data) return <></>;
 
     const { myData, opponentData } = data;
+
+    const handlePlayCard = (selectedCardIndex: number, row: string) => {
+
+    }
 
     if (!myData || !opponentData) return <></>;
 
@@ -59,26 +83,26 @@ const GameBoard = () => {
         <>
             <div className="w-full grid grid-cols-[100px_1fr]">
                 {
-                    opponentData.units.reverse().map((row, rowIndex) => <DisplayRow cards={row} handleSelectCard={setSelectedCard} colorPallete={{
+                    opponentData.units.reverse().map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={setSelectedCard} colorPallete={{
                         pill: classNames.oponent.pill,
                         pillParagraph: classNames.oponent.pillParagraph,
                         cardImage: classNames.common.cardImage,
                         row: classNames.common.row
-                    }} />)
+                    }} site="opponent" selectedCardIndex={selectedCard} rowIndex={rowIndex} />)
                 }
                 {
-                    myData.units.map((row, rowIndex) => <DisplayRow cards={row} handleSelectCard={setSelectedCard} colorPallete={{
+                    myData.units.map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={setSelectedCard} colorPallete={{
                         pill: classNames.me.pill,
                         pillParagraph: classNames.me.pillParagraph,
                         cardImage: classNames.common.cardImage,
                         row: classNames.common.row
-                    }} />)
+                    }} site="me" selectedCardIndex={selectedCard} rowIndex={rowIndex} />)
                 }
             </div>
             <div className="w-full flex justify-center pl-24">
                 {
                     myData.nondrawed.map((card, colIndex) => {
-                        return <img onClick={() => setSelectedCard(card)} key={colIndex} className="w-32 -ml-24 hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
+                        return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => setSelectedCard(colIndex) : () => { }} key={colIndex} className={"w-32 -ml-24 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
                     })
                 }
             </div></>
