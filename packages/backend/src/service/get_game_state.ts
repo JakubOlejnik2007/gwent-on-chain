@@ -73,7 +73,7 @@ const get_game_state = update([text],
             GameKey: gameKey,
             opponentData: opponentData,
             myData: myData,
-            whichPlayerTurn: undefined
+            whichPlayerTurn: game.whichPlayerTurn
         }
         return { Ok: JSON.stringify(response) };
     }
