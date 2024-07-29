@@ -62,7 +62,7 @@ const GameMeta = () => {
                 } catch (error) {
                     console.error("Failed to update data:", error);
                 }
-            }, 2000);
+            }, 1000);
             return () => clearInterval(interval);
         }
     }, [data?.GameKey]);

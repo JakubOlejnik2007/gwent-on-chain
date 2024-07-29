@@ -40,14 +40,13 @@ const change_cards = update([text, nat32],
             gameBoardStore.insert(gameKey, game);
             throw new Error("Player has already changed 2 cards");
         }
-        let cardsToChange = player.pickable; // przechwycenie pickable
-        const card = player.nondrawed[cardIndex]; // wymieniana karta
-        let nondrawed = player.nondrawed.filter((c, index) => index !== cardIndex); // nondrawed bez wymienianej karty
-        let newCardIndex = Math.floor(Math.random() * cardsToChange.length); //wybranie nowej karty z pickable
+        let cardsToChange = player.pickable;
+        const card = player.nondrawed[cardIndex];
+        let nondrawed = player.nondrawed.filter((c, index) => index !== cardIndex);
+        let newCardIndex = Math.floor(Math.random() * cardsToChange.length);
+        nondrawed = [...nondrawed, cardsToChange[newCardIndex]];
 
-        nondrawed = [...nondrawed, cardsToChange[newCardIndex]]; // dodanie nowej karty do nondrawed
-
-        cardsToChange = cardsToChange.filter((_, index) => index !== newCardIndex); // usunięcie nowej karty z pickable
+        cardsToChange = cardsToChange.filter((_, index) => index !== newCardIndex);
 
         cardsToChange.push(card);
 

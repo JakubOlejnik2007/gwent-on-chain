@@ -7,6 +7,7 @@ import Pill from "../ui/Pill";
 import SelectDeck from "./SelectDeck";
 import { useActor } from "../../ic/Actors";
 import toast from "react-hot-toast";
+import GameBoard from "./GameBoard";
 
 const Game = () => {
 
@@ -23,6 +24,8 @@ const Game = () => {
             spin
         />
     );
+
+    const showReadiness: boolean = (data.myData !== undefined && data.opponentData !== undefined) && (data.myData?.ready && data.opponentData?.ready);
 
     const swapCard = async (cardIndex: number) => {
         try {
@@ -75,28 +78,32 @@ const Game = () => {
     return (
         <div className="w-full max-w-5xl border-zinc-700/50 border-[1px] bg-zinc-900 px-5 py-5 drop-shadow-xl rounded-3xl flex flex-col items-center">
             <div className="w-full flex justify-between">
-                <UserProfileGame {...data.myData} />
+                <UserProfileGame player={data.myData} showReadiness={showReadiness} />
                 <div className="flex gap-5">
                     <Pill className="bg-zinc-900 p-3">Id gry: {data.GameKey}</Pill>
-                    <Pill className="bg-zinc-900 p-3">Kolejka: {data.myData.name}</Pill>
+                    {data.whichPlayerTurn && <Pill className="bg-zinc-900 p-3">Kolejka: {data.whichPlayerTurn}</Pill>}
                 </div>
-                <UserProfileGame {...data.opponentData} />
+                <UserProfileGame player={data.opponentData} showReadiness={showReadiness} />
             </div>
-            {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
 
-            <div className="w-full">
-                <Pill className="bg-zinc-900 p-3">Zgodnie z zasadami gry możesz wymienić dwie karty. Po dokonaniu zmian naciśnij przycisk "Gotowość".<br />Zostało {2 - data.myData.cardsChanged} zmian.</Pill>
-                <div className="flex justify-center pl-28">
-                    {
-                        data.myData.nondrawed.length > 0 && data.myData.nondrawed.map((card, index) => {
-                            return (
-                                <img key={index} onClick={() => swapCard(index)} className="w-40 -ml-28 hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
-                            )
-                        })
-                    }
-                </div>
-            </div>
-            {!data.myData.ready && <div className="flex m-3">
+            {data.myData.ready && data.opponentData.ready && <GameBoard />}
+
+            {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
+            {!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length ?
+                <div className="w-full">
+                    <Pill className="bg-zinc-900 p-3">Zgodnie z zasadami gry możesz wymienić dwie karty. Po dokonaniu zmian naciśnij przycisk "Gotowość".<br />Zostało {2 - data.myData.cardsChanged} zmian.</Pill>
+                    <div className="flex justify-center pl-28">
+                        {
+                            data.myData.nondrawed.length > 0 && data.myData.nondrawed.map((card, index) => {
+                                return (
+                                    <img key={index} onClick={() => swapCard(index)} className="w-40 -ml-28 hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
+                                )
+                            })
+                        }
+                    </div>
+                </div> : ""
+            }
+            {(!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length) ? <div className="flex m-3">
                 <Button
                     icon={faCheckCircle}
                     onClick={changeReadiness}
@@ -104,7 +111,7 @@ const Game = () => {
                 >
                     Gotowość
                 </Button>
-            </div>}
+            </div> : ""}
         </div>
     );
 }

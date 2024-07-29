@@ -26,7 +26,8 @@ export interface Player {
 
 export interface GameBoardState {
     players: [Player, Player | undefined]
-    weatherEffectRow: GwentRow[]
+    weatherEffectRow: GwentRow[],
+    whichPlayerTurn: string | undefined;
 }
 
 export interface PlayerData {

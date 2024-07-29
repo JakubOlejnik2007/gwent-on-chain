@@ -35,6 +35,7 @@ const change_readiness = update([text],
         }
 
         if (updated) {
+            if(player1.ready && player2 && player2.ready) game.whichPlayerTurn = game.players[Math.floor(Math.random()*2)]?.name
             gameBoardStore.insert(gameKey, game);
             return { Ok: "Player readiness status updated successfully" };
         }

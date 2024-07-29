@@ -31,7 +31,8 @@ const create_game = update(
                 }, 
                 undefined
             ],
-            weatherEffectRow: []
+            weatherEffectRow: [],
+            whichPlayerTurn: undefined
         }
         const gameId = Math.random().toString();
 

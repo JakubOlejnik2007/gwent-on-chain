@@ -5,9 +5,15 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import AddressPill from "../AddressPill";
 import PrincipalPill from "../PrincipalPill";
 
+type UserProfileGameProps = {
+    player: PlayerData;
+    showReadiness: boolean;
+}
 
-const UserProfileGame = ({ address, name, avatar_url, ready }: PlayerData) => {
+const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
     const [imageError, setImageError] = useState<boolean>(false);
+
+    const { address, name, avatar_url, ready } = player;
 
     const handleImageError = () => {
         setImageError(true);
@@ -37,9 +43,10 @@ const UserProfileGame = ({ address, name, avatar_url, ready }: PlayerData) => {
                 <div className="text-xs text-zinc-500">
                     <PrincipalPill principal={address} />
                 </div>
-                <div className="text-sm text-center font-bold text-zinc-400">
-                    {ready ? "Gotowy" : "Dobiera karty…"  }
-                </div>
+
+                {!showReadiness && <div className="text-sm text-center font-bold text-zinc-400">
+                    {ready ? "Gotowy" : "Dobiera karty…"}
+                </div>}
             </div>
         </div>
     )
