@@ -19,11 +19,11 @@ export type GameMetaContextData = {
     GameKey: string;
     opponentData: PlayerData | undefined;
     myData: MyData | undefined;
-    whichPlayerTurn: string | undefined;
+    whichPlayerTurn: string | null;
 }
 
 export type GameMetaContextType = {
     data: GameMetaContextData | null;
     assignGameKeyToData: (GameKey: string) => void;
-    
+
 }

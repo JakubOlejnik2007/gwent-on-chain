@@ -3,6 +3,8 @@ import { GameMetaContext } from "./GameMeta";
 import Pill from "../ui/Pill";
 import { GwentCard } from "../../assets/gwentTypes.helper";
 import { PlayerData } from "./gamesTypes.helper";
+import { useActor } from "../../ic/Actors";
+import toast from "react-hot-toast";
 
 type DisplayRowProps = {
     cards: GwentCard[],
@@ -53,13 +55,26 @@ const GameBoard = () => {
 
     const { data } = useContext(GameMetaContext);
 
+    const { actor } = useActor();
+
+    if (!actor) return null;
+
     const [selectedCard, setSelectedCard] = React.useState<number | null>(null);
     if (!data) return <></>;
 
     const { myData, opponentData } = data;
 
-    const handlePlayCard = (selectedCardIndex: number, row: string) => {
-
+    const handlePlayCard = async (selectedCardIndex: number, row: string) => {
+        try {
+            toast.success("Wysłano zagraną kartę");
+            const response = await actor.play_card(data.GameKey, row, selectedCardIndex);
+            if ("Err" in response) throw new Error(response.Err);
+            if ("Ok" in response) console.log(response.Ok);
+            toast.success("Wysłano kartę!");
+        } catch (error) {
+            toast.error("Błąd podczas gry!");
+            console.error(error);
+        }
     }
 
     if (!myData || !opponentData) return <></>;
@@ -74,7 +89,7 @@ const GameBoard = () => {
             pillParagraph: "text-gray-900 font-bold text-xl p-3",
         },
         common: {
-            cardImage: "w-10 h-10",
+            cardImage: "w-20",
             row: "w-full h-32"
         }
     }
@@ -83,15 +98,25 @@ const GameBoard = () => {
         <>
             <div className="w-full grid grid-cols-[100px_1fr]">
                 {
-                    opponentData.units.reverse().map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={setSelectedCard} colorPallete={{
-                        pill: classNames.oponent.pill,
-                        pillParagraph: classNames.oponent.pillParagraph,
-                        cardImage: classNames.common.cardImage,
-                        row: classNames.common.row
-                    }} site="opponent" selectedCardIndex={selectedCard} rowIndex={rowIndex} />)
+                    [...opponentData.units].reverse().map((row, rowIndex) => (
+                        <DisplayRow
+                            key={rowIndex}
+                            cards={row}
+                            handlePlayCard={handlePlayCard}
+                            colorPallete={{
+                                pill: classNames.oponent.pill,
+                                pillParagraph: classNames.oponent.pillParagraph,
+                                cardImage: classNames.common.cardImage,
+                                row: classNames.common.row
+                            }}
+                            site="opponent"
+                            selectedCardIndex={selectedCard}
+                            rowIndex={rowIndex}
+                        />
+                    ))
                 }
                 {
-                    myData.units.map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={setSelectedCard} colorPallete={{
+                    myData.units.map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={handlePlayCard} colorPallete={{
                         pill: classNames.me.pill,
                         pillParagraph: classNames.me.pillParagraph,
                         cardImage: classNames.common.cardImage,
@@ -102,7 +127,7 @@ const GameBoard = () => {
             <div className="w-full flex justify-center pl-24">
                 {
                     myData.nondrawed.map((card, colIndex) => {
-                        return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => setSelectedCard(colIndex) : () => { }} key={colIndex} className={"w-32 -ml-24 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
+                        return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => setSelectedCard(colIndex) : () => { }} key={colIndex} className={"w-24 -ml-16 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
                     })
                 }
             </div></>

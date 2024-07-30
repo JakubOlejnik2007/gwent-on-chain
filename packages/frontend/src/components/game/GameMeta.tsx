@@ -25,7 +25,7 @@ const testObject: GameMetaContextData = {
         ready: true,
         cardsChanged: 1,
     },
-    whichPlayerTurn: undefined,
+    whichPlayerTurn: null,
 };
 
 export const GameMetaContext = createContext<GameMetaContextType>({
@@ -42,7 +42,7 @@ const GameMeta = () => {
             GameKey: GameKey,
             opponentData: undefined,
             myData: undefined,
-            whichPlayerTurn: undefined,
+            whichPlayerTurn: null,
         });
     };
 

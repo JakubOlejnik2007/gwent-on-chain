@@ -14,6 +14,7 @@ import get_game_state from "./service/get_game_state";
 import get_deck from "./service/get_deck";
 import change_readiness from "./service/change_readiness";
 import change_cards from "./service/change_cards";
+import play_card from "./service/play_card";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -31,5 +32,6 @@ export default Canister({
   get_game_state,
   get_deck,
   change_readiness,
-  change_cards
+  change_cards,
+  play_card
 });

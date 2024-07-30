@@ -20,7 +20,6 @@ deploy-provider:
 	)"
 
 deploy-backend:
-	npm install
 	dfx deploy backend --argument "(principal \"$$(dfx canister id ic_siwe_provider)\")"
 
 deploy-frontend:

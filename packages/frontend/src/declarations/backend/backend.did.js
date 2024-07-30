@@ -1,138 +1,149 @@
 export const idlFactory = ({ IDL }) => {
   return IDL.Service({
-    'clear_game_board_store' : IDL.Func(
+    'clear_game_board_store': IDL.Func(
       [],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'create_game' : IDL.Func(
+    'create_game': IDL.Func(
       [],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'get_my_profile' : IDL.Func(
+    'get_my_profile': IDL.Func(
       [],
       [
         IDL.Variant({
-          'Ok' : IDL.Record({
-            'avatar_url' : IDL.Text,
-            'name' : IDL.Text,
-            'address' : IDL.Text,
+          'Ok': IDL.Record({
+            'avatar_url': IDL.Text,
+            'name': IDL.Text,
+            'address': IDL.Text,
           }),
-          'Err' : IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       ['query']
     ),
-    'join_game' : IDL.Func(
+    'join_game': IDL.Func(
       [IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'list_all_games' : IDL.Func(
+    'list_all_games': IDL.Func(
       [],
       [
         IDL.Variant({
-          'Ok' : IDL.Vec(IDL.Text),
-          'Err' : IDL.Text,
+          'Ok': IDL.Vec(IDL.Text),
+          'Err': IDL.Text,
         }),
       ],
       ['query']
     ),
-    'list_games_for_user' : IDL.Func(
+    'list_games_for_user': IDL.Func(
       [IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Vec(IDL.Text),
-          'Err' : IDL.Text,
+          'Ok': IDL.Vec(IDL.Text),
+          'Err': IDL.Text,
         }),
       ],
       ['query']
     ),
-    'list_profiles' : IDL.Func(
+    'list_profiles': IDL.Func(
       [],
       [
         IDL.Variant({
-          'Ok' : IDL.Vec(
+          'Ok': IDL.Vec(
             IDL.Tuple(
               IDL.Text,
               IDL.Record({
-                'avatar_url' : IDL.Text,
-                'name' : IDL.Text,
-                'address' : IDL.Text,
+                'avatar_url': IDL.Text,
+                'name': IDL.Text,
+                'address': IDL.Text,
               })
             )
           ),
-          'Err' : IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       ['query']
     ),
-    'save_my_profile' : IDL.Func(
+    'save_my_profile': IDL.Func(
       [IDL.Text, IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Record({
-            'avatar_url' : IDL.Text,
-            'name' : IDL.Text,
-            'address' : IDL.Text,
+          'Ok': IDL.Record({
+            'avatar_url': IDL.Text,
+            'name': IDL.Text,
+            'address': IDL.Text,
           }),
-          'Err' : IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'get_game_state' : IDL.Func(
+    'get_game_state': IDL.Func(
       [IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'get_deck' : IDL.Func(
+    'get_deck': IDL.Func(
       [IDL.Text, IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'change_readiness' : IDL.Func(
+    'change_readiness': IDL.Func(
       [IDL.Text],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []
     ),
-    'change_cards' : IDL.Func(
+    'change_cards': IDL.Func(
       [IDL.Text, IDL.Nat32],
       [
         IDL.Variant({
-          'Ok' : IDL.Text,
-          'Err' : IDL.Text,
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
+        }),
+      ],
+      []
+    ),
+
+    'play_card': IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Nat32],
+      [
+        IDL.Variant({
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
         }),
       ],
       []

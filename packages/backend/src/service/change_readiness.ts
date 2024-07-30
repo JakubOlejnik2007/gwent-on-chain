@@ -1,5 +1,6 @@
 import { ic, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
+import { Player } from "../types";
 
 const changeReadinessResponse = Variant({
     Ok: text,
@@ -34,8 +35,9 @@ const change_readiness = update([text],
             return { Err: "This address is not in this game" };
         }
 
+        if (player1.ready && player2 && player2.ready) game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name
+
         if (updated) {
-            if(player1.ready && player2 && player2.ready) game.whichPlayerTurn = game.players[Math.floor(Math.random()*2)]?.name
             gameBoardStore.insert(gameKey, game);
             return { Ok: "Player readiness status updated successfully" };
         }

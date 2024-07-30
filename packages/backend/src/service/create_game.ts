@@ -6,7 +6,7 @@ import { profileStore } from '../user_profiles';
 const CreateGameResponse = Variant({
     Ok: text,
     Err: text,
-  });
+});
 
 const create_game = update(
     [],
@@ -25,14 +25,14 @@ const create_game = update(
                     commander: undefined,
                     rejected: [],
                     nondrawed: [],
-                    pickable:[],
+                    pickable: [],
                     ready: false,
                     cardsChanged: 0
-                }, 
-                undefined
+                },
+                null
             ],
             weatherEffectRow: [],
-            whichPlayerTurn: undefined
+            whichPlayerTurn: null
         }
         const gameId = Math.random().toString();
 

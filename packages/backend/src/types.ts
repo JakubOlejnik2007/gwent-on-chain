@@ -25,9 +25,9 @@ export interface Player {
 }
 
 export interface GameBoardState {
-    players: [Player, Player | undefined]
+    players: [Player, Player | null]
     weatherEffectRow: GwentRow[],
-    whichPlayerTurn: string | undefined;
+    whichPlayerTurn: string | null;
 }
 
 export interface PlayerData {
@@ -49,5 +49,5 @@ export type GameMetaContextData = {
     GameKey: string;
     opponentData: PlayerData | undefined;
     myData: MyData | undefined;
-    whichPlayerTurn: string | undefined;
+    whichPlayerTurn: string | null;
 }
