@@ -27,6 +27,13 @@
       ]
     }
   },
+  "networks": {
+    "mainnet": {
+      "providers": [
+        "https://ic0.app"
+      ]
+    }
+  },
   "config": {
     "connection_read_timeout_seconds": 0,
     "request_timeout_seconds": 150,

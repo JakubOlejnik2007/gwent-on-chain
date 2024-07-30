@@ -13,7 +13,7 @@ deploy-provider:
 	        sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
 	        session_expires_in = opt 604800000000000; /* 1 week */ \
 	        targets = opt vec { \
-	            \"$$(dfx canister id ic_siwe_provider)\"; \
+	            \"$$(dfx canister ic id ic_siwe_provider)\"; \
 	            \"$$(dfx canister id backend)\"; \
 	        }; \
 	    } \
@@ -27,6 +27,31 @@ deploy-frontend:
 	dfx deploy frontend
 
 deploy-all: create-canisters deploy-provider deploy-backend deploy-frontend
+
+deploy-all-ic:
+	dfx canister --network ic create --all
+
+	dfx deploy ic_siwe_provider --network ic --argument "( \
+	    record { \
+	        domain = \"127.0.0.1\"; \
+	        uri = \"http://127.0.0.1:5173\"; \
+	        salt = \"somerandomsalt\"; \
+	        chain_id = opt 1; \
+	        scheme = opt \"http\"; \
+	        statement = opt \"Login to gwent-on-chain\"; \
+	        sign_in_expires_in = opt 300000000000; /* 5 minutes */ \
+	        session_expires_in = opt 604800000000000; /* 1 week */ \
+	        targets = opt vec { \
+	            \"$$(dfx canister --network ic id ic_siwe_provider)\"; \
+	            \"$$(dfx canister --network ic id backend)\"; \
+	        }; \
+	    } \
+	)"
+
+	dfx deploy backend --network ic --argument "(principal \"$$(dfx canister --network ic id ic_siwe_provider)\")"
+	npm install
+
+	dfx deploy frontend --network ic
 
 run-frontend:
 	npm install
