@@ -148,6 +148,16 @@ export const idlFactory = ({ IDL }) => {
       ],
       []
     ),
+    'fold': IDL.Func(
+      [IDL.Text],
+      [
+        IDL.Variant({
+          'Ok': IDL.Text,
+          'Err': IDL.Text,
+        }),
+      ],
+      []
+    ),
   });
 };
 

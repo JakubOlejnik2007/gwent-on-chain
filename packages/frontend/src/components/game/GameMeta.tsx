@@ -13,6 +13,8 @@ const testObject: GameMetaContextData = {
         units: [[], [], []],
         commander: undefined,
         ready: false,
+        points: 2,
+        isFolded: false
     },
     myData: {
         address: "456",
@@ -24,6 +26,8 @@ const testObject: GameMetaContextData = {
         nondrawed: [],
         ready: true,
         cardsChanged: 1,
+        points: 2,
+        isFolded: false,
     },
     whichPlayerTurn: null,
 };

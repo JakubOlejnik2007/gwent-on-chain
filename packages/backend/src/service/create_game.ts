@@ -27,7 +27,9 @@ const create_game = update(
                     nondrawed: [],
                     pickable: [],
                     ready: false,
-                    cardsChanged: 0
+                    cardsChanged: 0,
+                    points: 2,
+                    isFolded: false,
                 },
                 null
             ],

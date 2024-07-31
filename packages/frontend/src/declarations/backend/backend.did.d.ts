@@ -69,6 +69,11 @@ export interface _SERVICE {
     { 'Ok': string } |
     { 'Err': string }
   >,
+  'fold': ActorMethod<
+    [string],
+    { 'Ok': string } |
+    { 'Err': string }
+  >,
 }
 
 export declare const idlFactory: IDL.InterfaceFactory;

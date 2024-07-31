@@ -13,7 +13,7 @@ type UserProfileGameProps = {
 const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
     const [imageError, setImageError] = useState<boolean>(false);
 
-    const { address, name, avatar_url, ready } = player;
+    const { address, name, avatar_url, ready, isFolded } = player;
 
     const handleImageError = () => {
         setImageError(true);
@@ -46,6 +46,9 @@ const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
 
                 {!showReadiness && <div className="text-sm text-center font-bold text-zinc-400">
                     {ready ? "Gotowy" : "Dobiera karty…"}
+                </div>}
+                {showReadiness && <div className="text-sm text-center font-bold text-zinc-400">
+                    {!isFolded ? "Gra" : "Spasował"}
                 </div>}
             </div>
         </div>

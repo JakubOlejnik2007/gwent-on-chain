@@ -62,6 +62,7 @@ const play_card = update([text, text, nat32],
             ].push(playedCard);
         }
 
+        if (player.nondrawed.length === 0) player.isFolded = true;
         gameBoardStore.insert(gameKey, game);
         changeTurn(gameKey);
 

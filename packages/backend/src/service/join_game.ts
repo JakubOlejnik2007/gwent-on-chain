@@ -28,8 +28,8 @@ const join_game = update(
 
         const game = gameOption.Some;
 
-        if(callerAddress === game.players[0].address || (game.players[1] !== null && game.players[1] !== undefined && callerAddress === game.players[1].address)) return { Ok: gameId };
-        if(game.players[1] !== null) throw new Error("Game already has 2 players");
+        if (callerAddress === game.players[0].address || (game.players[1] !== null && game.players[1] !== undefined && callerAddress === game.players[1].address)) return { Ok: gameId };
+        if (game.players[1] !== null) throw new Error("Game already has 2 players");
 
         const player: Player = {
             address: callerAddress,
@@ -39,9 +39,11 @@ const join_game = update(
             commander: undefined,
             rejected: [],
             nondrawed: [],
-            pickable:[],
-            ready:false,
+            pickable: [],
+            ready: false,
             cardsChanged: 0,
+            points: 2,
+            isFolded: false,
         };
 
         game.players[1] = player;

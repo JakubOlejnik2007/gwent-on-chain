@@ -15,6 +15,7 @@ import get_deck from "./service/get_deck";
 import change_readiness from "./service/change_readiness";
 import change_cards from "./service/change_cards";
 import play_card from "./service/play_card";
+import fold from "./service/fold";
 
 export default Canister({
   init: init([Principal], (siweProviderPrincipal) => {
@@ -33,5 +34,6 @@ export default Canister({
   get_deck,
   change_readiness,
   change_cards,
-  play_card
+  play_card,
+  fold
 });

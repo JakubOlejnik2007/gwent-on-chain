@@ -25,48 +25,14 @@ const get_game_state = update([text],
             return { Err: "This address is not in this game" }
         }
 
-        myData = {
-            address: player1.address,
-            name: player1.name,
-            avatar_url: player1.avatar_url,
-            units: player1.units,
-            commander: player1.commander,
-            rejected: player1.rejected,
-            nondrawed: player1.nondrawed,
-            ready: player1.ready,
-            cardsChanged: player1.cardsChanged
-        };
+        myData = { ...player1 };
         if (player2) {
-            opponentData = {
-                address: player2.address,
-                name: player2.name,
-                avatar_url: player2.avatar_url,
-                units: player2.units,
-                commander: player2.commander,
-                ready: player2.ready
-            };
+            opponentData = { ...player2 };
         }
         if (player2) {
             if (player2.address === address) {
-                myData = {
-                    address: player2.address,
-                    name: player2.name,
-                    avatar_url: player2.avatar_url,
-                    units: player2.units,
-                    commander: player2.commander,
-                    rejected: player2.rejected,
-                    nondrawed: player2.nondrawed,
-                    ready: player2.ready,
-                    cardsChanged: player2.cardsChanged
-                }
-                opponentData = {
-                    address: player1.address,
-                    name: player1.name,
-                    avatar_url: player1.avatar_url,
-                    units: player1.units,
-                    commander: player1.commander,
-                    ready: player1.ready
-                }
+                myData = { ...player2 }
+                opponentData = { ...player1 }
             }
         } else opponentData = undefined;
         const response: GameMetaContextData = {

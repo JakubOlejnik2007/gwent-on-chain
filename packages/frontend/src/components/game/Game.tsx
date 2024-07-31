@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GameMetaContext } from "./GameMeta";
 import Button from "../ui/Button";
-import { faCircleNotch, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircleNotch, faCheckCircle, faFlag } from "@fortawesome/free-solid-svg-icons";
 import UserProfileGame from "./UserProfileGame";
 import Pill from "../ui/Pill";
 import SelectDeck from "./SelectDeck";
@@ -13,6 +13,8 @@ const Game = () => {
 
     const { actor } = useActor();
     const [isChangingReadiness, setIsChangingReadiness] = useState<boolean>(false);
+    const [isFolding, setIsFolding] = useState<boolean>(false);
+
     const {
         data
     } = useContext(GameMetaContext);
@@ -61,6 +63,23 @@ const Game = () => {
         }
     }
 
+    const fold = async () => {
+        try {
+            if (!actor) throw new Error("Actor not found");
+            setIsFolding(true);
+            const response = await actor.fold(data.GameKey);
+            if (response === undefined) throw new Error("Undefined object");
+            if ("Err" in response) throw new Error(response.Err);
+            if ("Ok" in response) console.log(response.Ok);
+            toast.success("Zmieniono status");
+            setIsFolding(false);
+        } catch (error) {
+            toast.error("Nie udało się zmienić statusu")
+            setIsFolding(false);
+            console.log(error);
+        }
+    }
+
     if (data.opponentData === undefined || data.myData === undefined) return (
         <>
 
@@ -76,18 +95,26 @@ const Game = () => {
     );
 
     return (
-        <div className="w-full max-w-5xl border-zinc-700/50 border-[1px] bg-zinc-900 px-5 py-5 drop-shadow-xl rounded-3xl flex flex-col items-center">
-            <div className="w-full flex justify-between">
-                <UserProfileGame player={data.myData} showReadiness={showReadiness} />
-                <div className="flex gap-5">
+        <div className="w-full border-zinc-700/50 border-[1px] bg-zinc-900 px-5 py-5 drop-shadow-xl rounded-3xl flex flex-row-reverse items-center">
+            <div className="flex flex-col justify-center items-center gap-2">
+                <UserProfileGame player={data.opponentData} showReadiness={showReadiness} />
+                <div className="flex flex-col gap-2">
                     <Pill className="bg-zinc-900 p-3">Id gry: {data.GameKey}</Pill>
                     {data.whichPlayerTurn && <Pill className="bg-zinc-900 p-3">Kolejka: {data.whichPlayerTurn}</Pill>}
                 </div>
-                <UserProfileGame player={data.opponentData} showReadiness={showReadiness} />
+                <div className="flex flex-col gap-2">
+                    <UserProfileGame player={data.myData} showReadiness={showReadiness} />
+                    <Button
+                        icon={faFlag}
+                        onClick={fold}
+                        disabled={isFolding || data.myData.isFolded}
+                        spin={isFolding}
+                    >Pasuję...</Button>
+                </div>
             </div>
-
-            {data.myData.ready && data.opponentData.ready && <GameBoard />}
-
+            <div className="w-full">
+                {data.myData.ready && data.opponentData.ready && <GameBoard />}
+            </div>
             {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
             {!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length ?
                 <div className="w-full">
