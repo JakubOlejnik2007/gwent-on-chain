@@ -35,7 +35,7 @@ const change_readiness = update([text],
             return { Err: "This address is not in this game" };
         }
 
-        if (player1.ready && player2 && player2.ready) game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name
+        if (player1.ready && player2 && player2.ready) game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name;
 
         if (updated) {
             gameBoardStore.insert(gameKey, game);

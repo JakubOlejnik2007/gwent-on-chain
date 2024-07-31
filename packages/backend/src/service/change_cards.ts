@@ -24,7 +24,7 @@ const change_cards = update([text, nat32],
         let playerIndex: 0 | 1;
 
         if (game.players[0].address === address) playerIndex = 0;
-        else if (game.players[1].address === address) playerIndex = 1;
+        else if (game.players[1] && game.players[1].address === address) playerIndex = 1;
         else {
             return { Err: "Address not found in this game" };
         }
@@ -36,6 +36,7 @@ const change_cards = update([text, nat32],
 
         if (!(player.cardsChanged < 2)) {
             player.ready = true;
+            (game.players[Math.floor(Math.random() * 2)] as Player).name;
             game.players[playerIndex] = player;
             gameBoardStore.insert(gameKey, game);
             throw new Error("Player has already changed 2 cards");
@@ -60,7 +61,7 @@ const change_cards = update([text, nat32],
         game.players[playerIndex] = player;
         if (!(player.cardsChanged < 2)) {
             player.ready = true;
-            game.players[playerIndex] = player;
+            game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name;
             gameBoardStore.insert(gameKey, game);
         }
         gameBoardStore.insert(gameKey, game);
