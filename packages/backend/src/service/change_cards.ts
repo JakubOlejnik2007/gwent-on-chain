@@ -61,7 +61,7 @@ const change_cards = update([text, nat32],
         game.players[playerIndex] = player;
         if (!(player.cardsChanged < 2)) {
             player.ready = true;
-            game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name;
+            if (game.players[0].ready && game.players[1] && game.players[1].ready) game.whichPlayerTurn = (game.players[Math.floor(Math.random() * 2)] as Player).name;
             gameBoardStore.insert(gameKey, game);
         }
         gameBoardStore.insert(gameKey, game);

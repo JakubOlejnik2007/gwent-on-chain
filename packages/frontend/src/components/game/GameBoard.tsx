@@ -39,7 +39,7 @@ const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, ha
 
     return <>
         <Pill className={colorPallete.pill}><p className={colorPallete.pillParagraph}>{sumFromRow}</p></Pill>
-        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[1px] border-yellow-300" : "")}
+        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "")}
             onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, (data.myData?.nondrawed[selectedCardIndex] as GwentCard).row) : () => { }}
         >
             {cards.map((card, colIndex) => {
@@ -71,6 +71,7 @@ const GameBoard = () => {
             if ("Err" in response) throw new Error(response.Err);
             if ("Ok" in response) console.log(response.Ok);
             toast.success("Wysłano kartę!");
+            setSelectedCard(null);
         } catch (error) {
             toast.error("Błąd podczas gry!");
             console.error(error);
@@ -89,14 +90,14 @@ const GameBoard = () => {
             pillParagraph: "text-gray-900 font-bold text-xl p-3",
         },
         common: {
-            cardImage: "w-20",
-            row: "w-full h-32"
+            cardImage: "w-20 -ml-10",
+            row: "w-full h-32 flex justify-center"
         }
     }
 
     return (
         <>
-            <div className="w-full grid grid-cols-[100px_1fr]">
+            <div className="w-full grid gap-1 grid-cols-[100px_1fr]">
                 {
                     [...opponentData.units].reverse().map((row, rowIndex) => (
                         <DisplayRow
