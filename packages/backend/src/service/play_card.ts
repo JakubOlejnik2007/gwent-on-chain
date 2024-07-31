@@ -1,6 +1,7 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
 import { GameBoardState, Player } from "../types";
+import handleBothFolded from "./handle_both_folded";
 
 const playCardResponse = Variant({
     Ok: text,
@@ -75,6 +76,7 @@ const play_card = update([text, text, nat32],
         }
 
         if (player.nondrawed.length === 0) player.isFolded = true;
+        if (player.isFolded && opponent.isFolded) handleBothFolded(gameKey);
         gameBoardStore.insert(gameKey, game);
         changeTurn(gameKey);
 

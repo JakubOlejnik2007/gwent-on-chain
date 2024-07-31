@@ -1,5 +1,6 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
+import handleBothFolded from "./handle_both_folded";
 
 const foldResponse = Variant({
     Ok: text,
@@ -17,20 +18,23 @@ const fold = update([text],
         }
 
         const game = gameOption.Some;
-        if (!game.players[1]) return { Err: "Game doesn't have two players" };
-        if (game.players[0].address === address) {
-            const player = game.players[0];
-            player.isFolded = true;
+
+        const [player1, player2] = game.players;
+
+        if (!player2) return { Err: "Game doesn't have two players" };
+        if (player1.address === address) {
+            player1.isFolded = true;
             gameBoardStore.insert(gameKey, game);
-            return { Ok: "Player folded" };
-        } else if (game.players[1] && game.players[1].address === address) {
-            const player = game.players[1];
-            player.isFolded = true;
+        } else if (player2 && player2.address === address) {
+            player2.isFolded = true;
             gameBoardStore.insert(gameKey, game);
-            return { Ok: "Player folded" };
         } else {
             return { Err: "Address not found in this game" };
         }
+
+        if (player1.isFolded && player2.isFolded) handleBothFolded(gameKey);
+
+        return { Ok: "Player folded" };
     }
 );
 
