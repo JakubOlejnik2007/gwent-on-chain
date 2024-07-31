@@ -18,8 +18,7 @@ const change_readiness = update([text],
         }
 
         const game = gameOption.Some;
-        const player1 = game.players[0];
-        const player2 = game.players[1];
+        const [player1, player2] = game.players;
 
         let updated = false;
 

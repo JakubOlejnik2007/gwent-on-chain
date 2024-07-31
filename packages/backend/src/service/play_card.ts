@@ -7,13 +7,25 @@ const playCardResponse = Variant({
     Err: text,
 });
 
-const changeTurn = (gameKey: string) => {
+const changeTurn = (gameKey: string): void => {
     const game = gameBoardStore.get(gameKey).Some as GameBoardState;
-    game.whichPlayerTurn = game.whichPlayerTurn === game.players[0].name ?
-        (game.players[1] as Player).name : game.players[0].name;
+    const [player1, player2] = game.players;
+
+    const currentPlayer = (game.whichPlayerTurn === player1.name ? player1 : player2) as Player;
+    const otherPlayer = (game.whichPlayerTurn === player1.name ? player2 : player1) as Player;
+
+    if (currentPlayer?.isFolded) {
+        console.log(`${currentPlayer.name} has passed. Turn does not change.`);
+        return;
+    }
+
+    if (!otherPlayer?.isFolded) {
+        game.whichPlayerTurn = otherPlayer.name;
+    }
+
 
     gameBoardStore.insert(gameKey, game);
-}
+};
 
 const play_card = update([text, text, nat32],
     playCardResponse,
