@@ -18,10 +18,10 @@ const get_deck = update([text, text],
         if (!game) {
             return { Err: "No game found for the given key" };
         }
-        if(!isGwentDeck(deck)) {
+        if (!isGwentDeck(deck)) {
             return { Err: "Invalid deck" };
         }
-        if(game.players[1] === undefined) {
+        if (game.players[1] === undefined) {
             return { Err: "No opponent found in this game" };
         }
 
@@ -29,7 +29,7 @@ const get_deck = update([text, text],
         let playerIndex: 0 | 1;
 
         if (game.players[0].address === address) playerIndex = 0;
-        else if (game.players[1].address === address) playerIndex = 1;
+        else if ((game.players[1] as Player).address === address) playerIndex = 1;
         else {
             return { Err: "Address not found in this game" };
         }
@@ -44,7 +44,7 @@ const get_deck = update([text, text],
         for (let i = 0; i < 10; i++) {
             const card = cards[Math.floor(Math.random() * cards.length)];
             selectedCards.push(card);
-            cards = cards.filter(c => c!== card);
+            cards = cards.filter(c => c !== card);
         }
 
         (game.players[playerIndex] as Player).pickable = cards;

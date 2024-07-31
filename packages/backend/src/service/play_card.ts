@@ -38,6 +38,7 @@ const play_card = update([text, text, nat32],
         let opponentIndex = playerIndex === 0 ? 1 : 0;
 
         const player = game.players[playerIndex] as Player;
+        const opponent = game.players[opponentIndex] as Player;
 
         if (player.name !== game.whichPlayerTurn) return { Err: "Not your turn" };
 
@@ -46,6 +47,16 @@ const play_card = update([text, text, nat32],
 
         if (playedCard.ability !== "spy") {
             player.units[
+                cardRow === "melee" ? 0 :
+                    cardRow === "ranged" ? 1 : 2
+            ].push(playedCard);
+        } else {
+            for (let i = 0; i < 2; i++) {
+                const card = player.pickable[Math.floor(Math.random() * player.pickable.length)];
+                player.nondrawed.push(card);
+                player.pickable = player.pickable.filter(c => c !== card);
+            }
+            opponent.units[
                 cardRow === "melee" ? 0 :
                     cardRow === "ranged" ? 1 : 2
             ].push(playedCard);

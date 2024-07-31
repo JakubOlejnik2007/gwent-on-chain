@@ -23,16 +23,34 @@ type DisplayRowProps = {
 const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard }: DisplayRowProps) => {
     const { data } = useContext(GameMetaContext);
 
+    const isRowPlaceable = (card: GwentCard, rowIndex: number, site: "opponent" | "me"): boolean => {
+        const cardRow = card.row;
+        const cardAbility = card.ability;
+
+        if (site === "opponent") {
+            if (cardAbility === "spy") {
+                if (cardRow === "melee" && rowIndex === 2) return true;
+                if (cardRow === "ranged" && rowIndex === 1) return true;
+                if (cardRow === "siege" && rowIndex === 0) return true;
+            } else return false;
+        }
+
+        if (cardAbility === "spy") return false;
+        if (cardAbility == "agility" && (rowIndex === 0 || rowIndex === 1)) return true;
+
+        if (cardRow === "every") return true;
+        if (cardRow === "melee" && rowIndex === 0) return true;
+        if (cardRow === "ranged" && rowIndex === 1) return true;
+        if (cardRow === "siege" && rowIndex === 2) return true;
+
+        return false;
+    }
+
     if (!data) return <></>;
     let isSelectedCardPlacable = false;
     if (selectedCardIndex !== null) {
-        const selectedCard = data.myData?.nondrawed[selectedCardIndex];
-        isSelectedCardPlacable = (selectedCard?.row === "every" && !selectedCard?.isWeather && site === "me") || (site === "me"
-            && (
-                (selectedCard?.row == "melee" && rowIndex === 0) ||
-                (selectedCard?.row == "ranged" && rowIndex === 1) ||
-                (selectedCard?.row == "siege" && rowIndex === 2)
-            ));
+        const selectedCard = data.myData?.nondrawed[selectedCardIndex] as GwentCard;
+        isSelectedCardPlacable = isRowPlaceable(selectedCard, rowIndex, site);
     }
 
     const sumFromRow = cards.reduce((acc, card) => acc + card.baseStrength, 0);
@@ -81,7 +99,7 @@ const GameBoard = () => {
     if (!myData || !opponentData) return <></>;
 
     const classNames = {
-        oponent: {
+        opponent: {
             pill: "bg-cyan-600 w-fit h-fit m-auto",
             pillParagraph: "text-gray-900 font-bold text-xl p-3",
         },
@@ -105,8 +123,8 @@ const GameBoard = () => {
                             cards={row}
                             handlePlayCard={handlePlayCard}
                             colorPallete={{
-                                pill: classNames.oponent.pill,
-                                pillParagraph: classNames.oponent.pillParagraph,
+                                pill: classNames.opponent.pill,
+                                pillParagraph: classNames.opponent.pillParagraph,
                                 cardImage: classNames.common.cardImage,
                                 row: classNames.common.row
                             }}
