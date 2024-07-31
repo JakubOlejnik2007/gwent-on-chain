@@ -104,17 +104,16 @@ const Game = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <UserProfileGame player={data.myData} showReadiness={showReadiness} />
-                    <Button
-                        icon={faFlag}
-                        onClick={fold}
-                        disabled={isFolding || data.myData.isFolded}
-                        spin={isFolding}
-                    >Pasuję...</Button>
+                    {data.myData.ready && data.opponentData.ready &&
+                        <Button
+                            icon={faFlag}
+                            onClick={fold}
+                            disabled={isFolding || data.myData.isFolded}
+                            spin={isFolding}
+                        >Pasuję...</Button>}
                 </div>
             </div>
-            <div className="w-full">
-                {data.myData.ready && data.opponentData.ready && <GameBoard />}
-            </div>
+            {data.myData.ready && data.opponentData.ready && <GameBoard />}
             {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
             {!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length ?
                 <div className="w-full">
@@ -128,17 +127,18 @@ const Game = () => {
                             })
                         }
                     </div>
+                    {(!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length) ?
+                        <Button
+                            className="flex m-auto mt-3"
+                            icon={faCheckCircle}
+                            onClick={changeReadiness}
+                            disabled={isChangingReadiness}
+                        >
+                            Gotowość
+                        </Button> : ""}
                 </div> : ""
             }
-            {(!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length) ? <div className="flex m-3">
-                <Button
-                    icon={faCheckCircle}
-                    onClick={changeReadiness}
-                    disabled={isChangingReadiness}
-                >
-                    Gotowość
-                </Button>
-            </div> : ""}
+
         </div>
     );
 }

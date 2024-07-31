@@ -13,7 +13,7 @@ type UserProfileGameProps = {
 const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
     const [imageError, setImageError] = useState<boolean>(false);
 
-    const { address, name, avatar_url, ready, isFolded } = player;
+    const { address, name, avatar_url, ready, isFolded, points } = player;
 
     const handleImageError = () => {
         setImageError(true);
@@ -50,8 +50,12 @@ const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
                 {showReadiness && <div className="text-sm text-center font-bold text-zinc-400">
                     {!isFolded ? "Gra" : "Spasował"}
                 </div>}
+                {showReadiness && <div className="flex justify-between">
+                    <div className={"w-10 h-10 rounded-full " + (points > 1 ? "bg-red-600" : "text-zinc-400")}></div>
+                    <div className="w-10 h-10 bg-red-600 rounded-full"></div>
+                </div>}
             </div>
-        </div>
+        </div >
     )
 }
 

@@ -114,7 +114,7 @@ const GameBoard = () => {
     }
 
     return (
-        <>
+        <div className="w-full">
             <div className="w-full grid gap-1 grid-cols-[100px_1fr]">
                 {
                     [...opponentData.units].reverse().map((row, rowIndex) => (
@@ -149,7 +149,7 @@ const GameBoard = () => {
                         return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => setSelectedCard(colIndex) : () => { }} key={colIndex} className={"w-24 -ml-16 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
                     })
                 }
-            </div></>
+            </div></div>
     );
 }
 

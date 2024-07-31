@@ -51,9 +51,9 @@ const SelectDeck = () => {
     ]
 
     return (
-        <div className="flex flex-col items-center w-full gap-10 py-8 md:px-8">
+        <div className="flex flex-col items-center justify-center w-full gap-10 py-8 md:px-8">
             <div className="text-2xl font-bold">Wybierz talię</div>
-            <div className="flex items-stretch justify-center flex-wrap gap-5">
+            <div className="flex items-center justify-center flex-wrap gap-5">
                 {
                     decks.map((deck, index) => (
                         <div key={index} className='flex flex-col gap-3'>
@@ -64,8 +64,8 @@ const SelectDeck = () => {
                 }
             </div>
             {isError ? <div className='bg-red-700 rounded-xl px-4 py-2 drop-shadow-lg'>
-                    Błąd podczas pobierania kart.
-                </div> : ""}
+                Błąd podczas pobierania kart.
+            </div> : ""}
         </div>
     )
 }
