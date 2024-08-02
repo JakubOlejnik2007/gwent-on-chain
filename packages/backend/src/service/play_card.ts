@@ -39,6 +39,12 @@ const play_card = update([text, text, nat32],
         const playedCard = player.nondrawed[cardIndex];
         player.nondrawed = player.nondrawed.filter(card => card.imageUrl !== playedCard.imageUrl)
 
+        if (playedCard.isWeather) {
+            game.weatherEffectRow.push(playedCard);
+            game.weatherEffectRow = [...new Set(game.weatherEffectRow)];
+            return { Ok: "Card played." };
+        }
+
         if (playedCard.ability !== "spy") {
             player.units[
                 cardRow === "melee" ? 0 :

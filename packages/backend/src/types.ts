@@ -27,8 +27,8 @@ export interface Player {
 }
 
 export interface GameBoardState {
-    players: [Player, Player | null]
-    weatherEffectRow: GwentRow[],
+    players: [Player, Player | null];
+    weatherEffectRow: GwentCard[];
     whichPlayerTurn: string | null;
 }
 
