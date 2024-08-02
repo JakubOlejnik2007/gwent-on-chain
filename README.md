@@ -4,7 +4,6 @@ GWENTonCHAIN is a card game inspired by the popular Gwent from the Witcher serie
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies](#technologies)
@@ -54,7 +53,6 @@ GWENTonCHAIN to gra karciana inspirowana popularnym Gwintem z serii Wiedźmin. P
 
 ## Spis treści
 
-- [Spis treści](#spis-treści)
 - [Wprowadzenie](#wprowadzenie)
 - [Funkcje](#funkcje)
 - [Technologie](#technologie)
