@@ -21,11 +21,15 @@ const handleBothFolded = (gameKey: string) => {
         player2.points--;
     }
 
+
     player1.isFolded = false;
     player2.isFolded = false;
 
     player1.rejected.push(...player1.units[0], ...player1.units[1], ...player1.units[2]);
     player2.rejected.push(...player2.units[0], ...player2.units[1], ...player2.units[2]);
+
+    player1.units = [[], [], []];
+    player2.units = [[], [], []];
 
     game.weatherEffectRow = [];
 
