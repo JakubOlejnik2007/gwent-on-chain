@@ -4,20 +4,12 @@ GWENTonCHAIN is a card game inspired by the popular Gwent from the Witcher serie
 
 ## Table of contents
 
-- [GWENTonCHAIN](#gwentonchain)
-  - [Table of contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Technologies](#technologies)
-  - [Contributing](#contributing)
-  - [License](#license)
-- [GWENTonCHAIN](#gwentonchain-1)
-  - [Spis treści](#spis-treści)
-  - [Wprowadzenie](#wprowadzenie)
-  - [Funkcje](#funkcje)
-  - [Technologie](#technologie)
-  - [Współpraca](#współpraca)
-  - [Licencja](#licencja)
+- [Table of contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Introduction
 
@@ -62,20 +54,12 @@ GWENTonCHAIN to gra karciana inspirowana popularnym Gwintem z serii Wiedźmin. P
 
 ## Spis treści
 
-- [GWENTonCHAIN](#gwentonchain)
-  - [Table of contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Technologies](#technologies)
-  - [Contributing](#contributing)
-  - [License](#license)
-- [GWENTonCHAIN](#gwentonchain-1)
-  - [Spis treści](#spis-treści)
-  - [Wprowadzenie](#wprowadzenie)
-  - [Funkcje](#funkcje)
-  - [Technologie](#technologie)
-  - [Współpraca](#współpraca)
-  - [Licencja](#licencja)
+- [Spis treści](#spis-treści)
+- [Wprowadzenie](#wprowadzenie)
+- [Funkcje](#funkcje)
+- [Technologie](#technologie)
+- [Współpraca](#współpraca)
+- [Licencja](#licencja)
 
 ## Wprowadzenie
 
