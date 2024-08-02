@@ -1,11 +1,11 @@
-import { getCardName } from "../assets/utils.helper";
+import { calcValueOfCardsInRow, getCardName, rowIndexToName } from "../assets/utils.helper";
 import gameBoardStore from "../game_board_store";
-import { GameBoardState, GwentCard, GwentRow, Player } from "../types";
+import { GameBoardState, GwentCard, GwentCardState, GwentRow, Player } from "../types";
 
 
 
-const calcSumOfPlayer = (player: Player): number => {
-    return player.units.reduce((acc1, row) => acc1 + row[1].reduce((acc2, card) => acc2 + card.baseStrength, 0), 0);
+const calcSumOfPlayer = (playerCards: [GwentCardState[], GwentCardState[], GwentCardState[]]): number => {
+    return playerCards.reduce((acc1, row) => acc1 + row.reduce((acc2, card) => acc2 + card.baseStrength, 0), 0);
 }
 
 
@@ -13,8 +13,17 @@ const handleBothFolded = (gameKey: string) => {
     const game = gameBoardStore.get(gameKey).Some as GameBoardState;
     const [player1, player2] = game.players as [Player, Player];
 
-    const sumOfPlayer1 = calcSumOfPlayer(player1);
-    const sumOfPlayer2 = calcSumOfPlayer(player2);
+    const calcStrenghOfCards: [
+        [GwentCardState[], GwentCardState[], GwentCardState[]], [GwentCardState[], GwentCardState[], GwentCardState[]]
+    ] = [[[], [], []], [[], [], []]]
+
+    for (let i = 0; i < 2; i++)
+        for (let j = 0; j < 3; j++) {
+            calcStrenghOfCards[i][j] = calcValueOfCardsInRow((game.players[i] as Player).units[j], game.weatherEffectRow, rowIndexToName(j as 0 | 1 | 2));
+        }
+
+    const sumOfPlayer1 = calcSumOfPlayer(calcStrenghOfCards[0]);
+    const sumOfPlayer2 = calcSumOfPlayer(calcStrenghOfCards[1]);
 
     if (sumOfPlayer1 > sumOfPlayer2) {
         player2.points--;

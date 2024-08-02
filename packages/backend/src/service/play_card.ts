@@ -3,15 +3,12 @@ import gameBoardStore from "../game_board_store";
 import { GameBoardState, GwentCard, GwentCardState, Player } from "../types";
 import handleBothFolded from "./handle_both_folded";
 import { changeTurn } from "./changeTurn";
-import { calcValueOfCardsInRow, getCardName } from "../assets/utils.helper";
+import { calcValueOfCardsInRow, getCardName, rowIndexToName, rowNameToIndex } from "../assets/utils.helper";
 
 const playCardResponse = Variant({
     Ok: text,
     Err: text,
 });
-
-const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2;
-const rowIndexToName = (index: 0 | 1 | 2): "melee" | "ranged" | "siege" => index === 0 ? "melee" : index === 1 ? "ranged" : "siege";
 
 const play_card = update([text, text, nat32],
     playCardResponse,

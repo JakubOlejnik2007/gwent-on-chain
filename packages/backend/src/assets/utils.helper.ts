@@ -43,3 +43,6 @@ export const calcValueOfCardsInRow = (row: [boolean, GwentCard[]], weatherEffect
     })
 
 }
+
+export const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2;
+export const rowIndexToName = (index: 0 | 1 | 2): "melee" | "ranged" | "siege" => index === 0 ? "melee" : index === 1 ? "ranged" : "siege";
