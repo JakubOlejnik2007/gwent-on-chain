@@ -1,3 +1,5 @@
+import { Null } from "azle";
+
 type GwentRow = "melee" | "ranged" | "siege" | "every";
 type GwentCardAbility = null | "spy" | "bond" | "brotherhood" | "morale" | "resurrection" | "horn" | "agility" | "purge" | "dummy"
 
@@ -575,6 +577,637 @@ export const northernRealmsCards: GwentCard[] = [
     {
         row: "siege",
         imageUrl: "/cards/northern_realms/nr_wieza2.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+] as const;
+
+export const nilfgaardCards: GwentCard[] = [
+    ...neutralCards,
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_albrich.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_assire.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_cahir.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_cyntia.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_emisariusz1.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_emisariusz2.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_fringilla.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_impera1.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_impera2.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_impera3.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_impera4.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_letho.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_lucznik1.png",
+        baseStrength: 10,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_lucznik2.png",
+        baseStrength: 10,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_lucznikow1.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_lucznikow2.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_menno.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_morteisen.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_morvan.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_nauzicaa1.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_nauzicaa2.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_nauzicaa3.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "bond"
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_obleznicze.png",
+        baseStrength: 0,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_puttkammer.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_rainfard.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_renuald.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_saper.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_shilard.png",
+        baseStrength: 7,
+        isHero: false,
+        isWeather: false,
+        ability: "spy"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_stefan.png",
+        baseStrength: 9,
+        isHero: false,
+        isWeather: false,
+        ability: "spy"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_sweers.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_tibor.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/nilfgaard/ni_vanhemar.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_vattier.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "spy"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/nilfgaard/ni_veremde.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_wielki_skorpion.png",
+        baseStrength: 10,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_zdezelowana.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/nilfgaard/ni_zerrikanski_skorpion.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    }
+] as const;
+export const montersCards: GwentCard[] = [
+    ...neutralCards,
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_bies.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_cmentarna.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_draug.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_endriaga.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_gargulec.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_ghul1.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_ghul2.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_ghul3.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_gryf.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_harpia.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_harpia_kelajno.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_imlerith.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_kejran.png",
+        baseStrength: 8,
+        isHero: true,
+        isWeather: false,
+        ability: "morale"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_krabopajak1.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_krabopajak2.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_krabopajak3.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/monsters/m_krabopajak_olbrzymi.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_kuroliszek.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_leszy.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/monsters/m_lodowy.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_mglak.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_morowa.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_nekker1.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_nekker2.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_nekker3.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_poroniec.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_przeraza.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_ropuch.png",
+        baseStrength: 7,
+        isHero: false,
+        isWeather: false,
+        ability: "purge"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wampir1.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wampir2.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wampir3.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wampir4.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wampir5.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_widlogon.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wiedzma1.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wiedzma2.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wiedzma3.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/monsters/m_wilkolak.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/monsters/m_wiwerna.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/monsters/m_zywiolak_ognia.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/monsters/m_zywiolak_ziemi.png",
         baseStrength: 6,
         isHero: false,
         isWeather: false,
