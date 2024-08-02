@@ -1,7 +1,7 @@
 import { ic, text, update, Variant } from "azle";
-import { PlayerData, MyData, GameMetaContextData, GwentCard, GwentDeck, Player } from "../types";
+import { GwentCard, GwentDeck, Player } from "../types";
 import gameBoardStore from "../game_board_store";
-import { northernRealmsCards } from "../assets/gwentCards.helper";
+import { monstersCards, nilfgaardCards, northernRealmsCards } from "../assets/gwentCards.helper";
 
 const isGwentDeck = (deck: string): deck is GwentDeck => ["Northern Realms", "Scoia'tael", "Monsters", "Nilfgaard"].includes(deck);
 
@@ -39,6 +39,8 @@ const get_deck = update([text, text],
 
         switch (deck) {
             case "Northern Realms": cards = northernRealmsCards; break;
+            case "Monsters": cards = monstersCards; break;
+            case "Nilfgaard": cards = nilfgaardCards; break;
         }
 
         for (let i = 0; i < 10; i++) {
