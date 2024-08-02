@@ -39,7 +39,8 @@ const get_game_state = update([text],
             GameKey: gameKey,
             opponentData: opponentData,
             myData: myData,
-            whichPlayerTurn: game.whichPlayerTurn
+            whichPlayerTurn: game.whichPlayerTurn,
+            weatherEffectRow: game.weatherEffectRow
         }
         return { Ok: JSON.stringify(response) };
     }

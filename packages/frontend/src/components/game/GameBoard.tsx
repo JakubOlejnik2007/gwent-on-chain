@@ -17,10 +17,11 @@ type DisplayRowProps = {
     rowIndex: number,
     site: "opponent" | "me",
     selectedCardIndex: number | null,
+    weatherEffects: GwentCard[],
     handlePlayCard: (selectedCardIndex: number, row: string) => void
 }
 
-const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard }: DisplayRowProps) => {
+const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard, weatherEffects }: DisplayRowProps) => {
     const { data } = useContext(GameMetaContext);
 
     const isRowPlaceable = (card: GwentCard, rowIndex: number, site: "opponent" | "me"): boolean => {
@@ -46,6 +47,19 @@ const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, ha
         return false;
     }
 
+    const hasRowEffect = (weatherEffects: GwentCard[], rowIndex: number, site: "opponent" | "me"): string => {
+        let effect = ""
+
+        weatherEffects.forEach(weatherEffect => {
+            if (weatherEffect.row === "melee" && ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent"))) effect = " bg-[url('/blizzard.gif')]";
+            if (weatherEffect.row === "ranged" && rowIndex === 1) effect = " bg-[url('/fog.gif')]";
+            if (weatherEffect.row === "siege" && ((rowIndex === 2 && site === "me") || (rowIndex === 0 && site === "opponent"))) effect = " bg-[url('/rain.gif')]";
+        })
+
+
+        return effect;
+    }
+
     if (!data) return <></>;
     let isSelectedCardPlacable = false;
     if (selectedCardIndex !== null) {
@@ -55,9 +69,11 @@ const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, ha
 
     const sumFromRow = cards.reduce((acc, card) => acc + card.baseStrength, 0);
 
+    const weatherEffect = hasRowEffect(weatherEffects, rowIndex, site);
+
     return <>
         <Pill className={colorPallete.pill}><p className={colorPallete.pillParagraph}>{sumFromRow}</p></Pill>
-        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "")}
+        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "") + weatherEffect}
             onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, (data.myData?.nondrawed[selectedCardIndex] as GwentCard).row) : () => { }}
         >
             {cards.map((card, colIndex) => {
@@ -109,7 +125,7 @@ const GameBoard = () => {
         },
         common: {
             cardImage: "w-20 -ml-10",
-            row: "w-full h-32 flex justify-center"
+            row: "w-full h-32 flex justify-center bg-cover bg-center"
         }
     }
 
@@ -131,6 +147,7 @@ const GameBoard = () => {
                             site="opponent"
                             selectedCardIndex={selectedCard}
                             rowIndex={rowIndex}
+                            weatherEffects={data.weatherEffectRow}
                         />
                     ))
                 }
@@ -140,7 +157,8 @@ const GameBoard = () => {
                         pillParagraph: classNames.me.pillParagraph,
                         cardImage: classNames.common.cardImage,
                         row: classNames.common.row
-                    }} site="me" selectedCardIndex={selectedCard} rowIndex={rowIndex} />)
+                    }} site="me" selectedCardIndex={selectedCard} rowIndex={rowIndex}
+                        weatherEffects={data.weatherEffectRow} />)
                 }
             </div>
             <div className="w-full flex justify-center pl-24">
