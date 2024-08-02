@@ -1214,3 +1214,310 @@ export const monstersCards: GwentCard[] = [
         ability: null
     },
 ] as const;
+
+export const scoiataelCards: GwentCard[] = [
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_barclay.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_brygada1.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_brygada2.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_ciarah.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_dennis.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_eithne.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_elfi1.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_elfi2.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_elfi3.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_filavandrel.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_ida.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_iorweth.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_isengrim.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: "morale"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_kadet.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_krasnolud1.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_krasnolud2.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_krasnolud3.png",
+        baseStrength: 3,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_lucznik.png",
+        baseStrength: 4,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_medyk1.png",
+        baseStrength: 0,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_medyk2.png",
+        baseStrength: 0,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_medyk3.png",
+        baseStrength: 0,
+        isHero: false,
+        isWeather: false,
+        ability: "resurrection"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_milva.png",
+        baseStrength: 10,
+        isHero: false,
+        isWeather: false,
+        ability: "morale"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_obroncy1.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_obroncy2.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_obroncy3.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_obroncy4.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_obroncy5.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_riordain.png",
+        baseStrength: 1,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_saskia.png",
+        baseStrength: 10,
+        isHero: true,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "siege",
+        imageUrl: "/cards/scoiatael/s_schirru.png",
+        baseStrength: 8,
+        isHero: false,
+        isWeather: false,
+        ability: "purge"
+    },
+    {
+        row: "ranged",
+        imageUrl: "/cards/scoiatael/s_toruviel.png",
+        baseStrength: 2,
+        isHero: false,
+        isWeather: false,
+        ability: null
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_wsparcie1.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_wsparcie2.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_wsparcie3.png",
+        baseStrength: 5,
+        isHero: false,
+        isWeather: false,
+        ability: "brotherhood"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_yaevinn.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_zwiadowca1.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_zwiadowca2.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+    {
+        row: "melee",
+        imageUrl: "/cards/scoiatael/s_zwiadowca3.png",
+        baseStrength: 6,
+        isHero: false,
+        isWeather: false,
+        ability: "agility"
+    },
+] as const;
