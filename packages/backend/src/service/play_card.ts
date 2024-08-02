@@ -39,7 +39,13 @@ const play_card = update([text, text, nat32],
         const playedCard = player.nondrawed[cardIndex];
         player.nondrawed = player.nondrawed.filter(card => card.imageUrl !== playedCard.imageUrl)
 
-        if (playedCard.isWeather) {
+        if (playedCard.row === "every" && playedCard.ability === "horn") {
+            player.units[
+                cardRow === "melee" ? 0 :
+                    cardRow === "ranged" ? 1 : 2
+            ][0] = true;
+        }
+        else if (playedCard.isWeather) {
             if (playedCard.row === "every") game.weatherEffectRow = [];
             else {
                 game.weatherEffectRow.push(playedCard);
@@ -49,7 +55,7 @@ const play_card = update([text, text, nat32],
             player.units[
                 cardRow === "melee" ? 0 :
                     cardRow === "ranged" ? 1 : 2
-            ].push(playedCard);
+            ][1].push(playedCard);
         } else {
             for (let i = 0; i < 2; i++) {
                 const card = player.pickable[Math.floor(Math.random() * player.pickable.length)];
@@ -59,7 +65,7 @@ const play_card = update([text, text, nat32],
             opponent.units[
                 cardRow === "melee" ? 0 :
                     cardRow === "ranged" ? 1 : 2
-            ].push(playedCard);
+            ][1].push(playedCard);
         }
 
         if (player.nondrawed.length === 0) player.isFolded = true;

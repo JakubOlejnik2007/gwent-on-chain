@@ -136,7 +136,7 @@ const GameBoard = () => {
                     [...opponentData.units].reverse().map((row, rowIndex) => (
                         <DisplayRow
                             key={rowIndex}
-                            cards={row}
+                            cards={row[1]}
                             handlePlayCard={handlePlayCard}
                             colorPallete={{
                                 pill: classNames.opponent.pill,
@@ -152,7 +152,7 @@ const GameBoard = () => {
                     ))
                 }
                 {
-                    myData.units.map((row, rowIndex) => <DisplayRow cards={row} handlePlayCard={handlePlayCard} colorPallete={{
+                    myData.units.map((row, rowIndex) => <DisplayRow cards={row[1]} handlePlayCard={handlePlayCard} colorPallete={{
                         pill: classNames.me.pill,
                         pillParagraph: classNames.me.pillParagraph,
                         cardImage: classNames.common.cardImage,

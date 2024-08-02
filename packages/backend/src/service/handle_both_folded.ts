@@ -2,7 +2,7 @@ import gameBoardStore from "../game_board_store";
 import { GameBoardState, Player } from "../types";
 
 const calcSumOfPlayer = (player: Player): number => {
-    return player.units.reduce((acc1, row) => acc1 + row.reduce((acc2, card) => acc2 + card.baseStrength, 0), 0);
+    return player.units.reduce((acc1, row) => acc1 + row[1].reduce((acc2, card) => acc2 + card.baseStrength, 0), 0);
 }
 
 const handleBothFolded = (gameKey: string) => {
@@ -25,11 +25,11 @@ const handleBothFolded = (gameKey: string) => {
     player1.isFolded = false;
     player2.isFolded = false;
 
-    player1.rejected.push(...player1.units[0], ...player1.units[1], ...player1.units[2]);
-    player2.rejected.push(...player2.units[0], ...player2.units[1], ...player2.units[2]);
+    player1.rejected.push(...player1.units[0][1], ...player1.units[1][1], ...player1.units[2][1]);
+    player2.rejected.push(...player2.units[0][1], ...player2.units[1][1], ...player2.units[2][1]);
 
-    player1.units = [[], [], []];
-    player2.units = [[], [], []];
+    player1.units = [[false, []], [false, []], [false, []]];
+    player2.units = [[false, []], [false, []], [false, []]];
 
     game.weatherEffectRow = [];
 
