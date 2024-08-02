@@ -21,7 +21,7 @@ const create_game = update(
                     address: ic.caller().toString(),
                     name: callerData.Some.name,
                     avatar_url: callerData.Some.avatar_url,
-                    units: [[], [], []],
+                    units: [[false, []], [false, []], [false, []]],
                     commander: undefined,
                     rejected: [],
                     nondrawed: [],

@@ -7,7 +7,7 @@ import { useActor } from "../../ic/Actors";
 import toast from "react-hot-toast";
 
 type DisplayRowProps = {
-    cards: GwentCard[],
+    cardsRow: [boolean, GwentCard[]],
     colorPallete: {
         pill: string,
         pillParagraph: string,
@@ -21,8 +21,10 @@ type DisplayRowProps = {
     handlePlayCard: (selectedCardIndex: number, row: string) => void
 }
 
-const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard, weatherEffects }: DisplayRowProps) => {
+const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard, weatherEffects }: DisplayRowProps) => {
     const { data } = useContext(GameMetaContext);
+
+    const [isHorn, cards] = cardsRow;
 
     const isRowPlaceable = (card: GwentCard, rowIndex: number, site: "opponent" | "me"): boolean => {
         const cardRow = card.row;
@@ -56,9 +58,15 @@ const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, ha
             if (weatherEffect.row === "siege" && ((rowIndex === 2 && site === "me") || (rowIndex === 0 && site === "opponent"))) effect = " bg-[url('/rain.gif')]";
         })
 
-
         return effect;
     }
+
+    const rowName = (rowIndex: number, site: "opponent" | "me"): string => {
+        return ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent")) ? "melee" :
+            rowIndex === 1 ? "ranged" : "siege";
+    }
+
+    const row = rowName(rowIndex, site);
 
     if (!data) return <></>;
     let isSelectedCardPlacable = false;
@@ -67,21 +75,54 @@ const DisplayRow = ({ cards, colorPallete, site, selectedCardIndex, rowIndex, ha
         isSelectedCardPlacable = isRowPlaceable(selectedCard, rowIndex, site);
     }
 
-    const sumFromRow = cards.reduce((acc, card) => acc + card.baseStrength, 0);
+    let howManyMoraleInRows = 0;
+    cards.forEach(card => howManyMoraleInRows += (card.ability === "morale" ? 1 : 0));
+    const sumFromRow = cards.reduce((acc, card) => {
+        const getCardName = ((card: GwentCard) => {
+            let cardName = card.imageUrl.split("/")[3].split(".")[0];
+            return cardName.substring(0, cardName.length - 1);
+        })
+
+        const thisCardName = getCardName(card);
+
+        let { isHero, baseStrength, ability } = card;
+        if (isHero) return acc + baseStrength;
+
+        data.weatherEffectRow.forEach((card) => card.row === row ? baseStrength = (baseStrength === 0 ? 0 : 1) : 0);
+
+        if (ability === "bond") {
+            let howManyOccurs = 0;
+
+            cards.forEach(card => {
+                const cardName = getCardName(card)
+                howManyOccurs += (cardName === thisCardName ? 1 : 0)
+            })
+
+            baseStrength = baseStrength * howManyOccurs;
+        }
+
+        baseStrength += howManyMoraleInRows;
+        if (ability === "morale" && howManyMoraleInRows > 0) baseStrength--;
+
+        return acc + (isHorn ? 2 * baseStrength : baseStrength)
+    }, 0);
 
     const weatherEffect = hasRowEffect(weatherEffects, rowIndex, site);
 
     return <>
         <Pill className={colorPallete.pill}><p className={colorPallete.pillParagraph}>{sumFromRow}</p></Pill>
-        <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "") + weatherEffect}
-            onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, (data.myData?.nondrawed[selectedCardIndex] as GwentCard).row) : () => { }}
-        >
-            {cards.map((card, colIndex) => {
-                return (
-                    <img key={colIndex} className={colorPallete.cardImage} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
-                )
-            })}
-        </div >
+        <div className="grid grid-cols-[80px_1fr]">
+            {isHorn ? <img className="w-20" src={"/cards/neutral/n_rog.png"} alt={"/cards/neutral/n_rog.png".split("/")[3].split(".")[0]} /> : <div />}
+            <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "") + weatherEffect}
+                onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, row) : () => { }}
+            >
+                {cards.map((card, colIndex) => {
+                    return (
+                        <img key={colIndex} className={colorPallete.cardImage} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
+                    )
+                })}
+            </div >
+        </div>
     </>;
 }
 
@@ -136,7 +177,7 @@ const GameBoard = () => {
                     [...opponentData.units].reverse().map((row, rowIndex) => (
                         <DisplayRow
                             key={rowIndex}
-                            cards={row[1]}
+                            cardsRow={row}
                             handlePlayCard={handlePlayCard}
                             colorPallete={{
                                 pill: classNames.opponent.pill,
@@ -152,7 +193,7 @@ const GameBoard = () => {
                     ))
                 }
                 {
-                    myData.units.map((row, rowIndex) => <DisplayRow cards={row[1]} handlePlayCard={handlePlayCard} colorPallete={{
+                    myData.units.map((row, rowIndex) => <DisplayRow cardsRow={row} handlePlayCard={handlePlayCard} colorPallete={{
                         pill: classNames.me.pill,
                         pillParagraph: classNames.me.pillParagraph,
                         cardImage: classNames.common.cardImage,

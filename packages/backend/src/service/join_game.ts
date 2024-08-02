@@ -35,7 +35,7 @@ const join_game = update(
             address: callerAddress,
             name: callerData.Some.name,
             avatar_url: callerData.Some.avatar_url,
-            units: [[], [], []],
+            units: [[false, []], [false, []], [false, []]],
             commander: undefined,
             rejected: [],
             nondrawed: [],
