@@ -15,7 +15,7 @@ export interface Player {
     address: string,
     name: string,
     avatar_url: string,
-    units: [GwentCard[], GwentCard[], GwentCard[]],
+    units: [[boolean, GwentCard[]], [boolean, GwentCard[]], [boolean, GwentCard[]]],
     commander: GwentCard | undefined,
     rejected: GwentCard[],
     nondrawed: GwentCard[],
@@ -27,8 +27,8 @@ export interface Player {
 }
 
 export interface GameBoardState {
-    players: [Player, Player | null]
-    weatherEffectRow: GwentRow[],
+    players: [Player, Player | null];
+    weatherEffectRow: GwentCard[];
     whichPlayerTurn: string | null;
 }
 
@@ -36,7 +36,7 @@ export interface PlayerData {
     address: string | undefined,
     name: string | undefined,
     avatar_url: string | undefined,
-    units: [GwentCard[], GwentCard[], GwentCard[]],
+    units: [[boolean, GwentCard[]], [boolean, GwentCard[]], [boolean, GwentCard[]]],
     commander: GwentCard | undefined,
     ready: boolean,
     points: 2 | 1 | 0,
@@ -54,4 +54,5 @@ export type GameMetaContextData = {
     opponentData: PlayerData | undefined;
     myData: MyData | undefined;
     whichPlayerTurn: string | null;
+    weatherEffectRow: GwentCard[];
 }

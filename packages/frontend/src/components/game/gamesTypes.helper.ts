@@ -4,7 +4,7 @@ export interface PlayerData {
     address: string | undefined,
     name: string | undefined,
     avatar_url: string | undefined,
-    units: [GwentCard[], GwentCard[], GwentCard[]],
+    units: [[boolean, GwentCard[]], [boolean, GwentCard[]], [boolean, GwentCard[]]],
     commander: GwentCard | undefined,
     ready: boolean,
     points: 2 | 1 | 0,
@@ -22,6 +22,7 @@ export type GameMetaContextData = {
     opponentData: PlayerData | undefined;
     myData: MyData | undefined;
     whichPlayerTurn: string | null;
+    weatherEffectRow: GwentCard[];
 }
 
 export type GameMetaContextType = {

@@ -4,34 +4,6 @@ import CreateGame from "./CreateGame";
 import Game from "./Game";
 import { GameMetaContextData, GameMetaContextType } from "./gamesTypes.helper";
 
-const testObject: GameMetaContextData = {
-    GameKey: "asdas",
-    opponentData: {
-        address: "123",
-        name: "opponent",
-        avatar_url: "https://tenco.waw.pl/img.png",
-        units: [[], [], []],
-        commander: undefined,
-        ready: false,
-        points: 2,
-        isFolded: false
-    },
-    myData: {
-        address: "456",
-        name: "player1",
-        avatar_url: "https://tenco.waw.pl/img.",
-        units: [[], [], []],
-        commander: undefined,
-        rejected: [],
-        nondrawed: [],
-        ready: true,
-        cardsChanged: 1,
-        points: 2,
-        isFolded: false,
-    },
-    whichPlayerTurn: null,
-};
-
 export const GameMetaContext = createContext<GameMetaContextType>({
     data: null,
     assignGameKeyToData: () => { },
@@ -47,6 +19,7 @@ const GameMeta = () => {
             opponentData: undefined,
             myData: undefined,
             whichPlayerTurn: null,
+            weatherEffectRow: [],
         });
     };
 

@@ -112,6 +112,13 @@ const Game = () => {
                             spin={isFolding}
                         >Pasuję...</Button>}
                 </div>
+                <div className="flex justify-center w-full ml-28">
+                    {data.weatherEffectRow.map((card, index) => {
+                        return (
+                            <img key={index} className="-ml-28 h-32" src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
+                        )
+                    })}
+                </div>
             </div>
             {data.myData.ready && data.opponentData.ready && <GameBoard />}
             {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
