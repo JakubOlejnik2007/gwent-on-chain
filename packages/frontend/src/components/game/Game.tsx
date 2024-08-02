@@ -120,7 +120,7 @@ const Game = () => {
                     })}
                 </div>
             </div>
-            {data.myData.ready && data.opponentData.ready && <GameBoard />}
+            {data.myData.ready && data.opponentData.ready && ((data.myData.points !== 0 && data.opponentData.points !== 0)) && <GameBoard />}
             {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
             {!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length ?
                 <div className="w-full">
@@ -144,6 +144,15 @@ const Game = () => {
                             Gotowość
                         </Button> : ""}
                 </div> : ""
+            }
+            {
+                (data.myData.points === 0 || data.opponentData.points === 0) &&
+                <div className="w-full h-full flex items-center justify-center">
+                    {data.myData.points !== data.opponentData.points ? <p>Wygrał gracz: {data.myData.points > data.opponentData.points ? data.myData.name : data.opponentData.name}</p> :
+                        <p>Remis</p>
+                    }
+
+                </div>
             }
 
         </div>
