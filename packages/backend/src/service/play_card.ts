@@ -1,9 +1,9 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
-import { GameBoardState, GwentCard, Player } from "../types";
+import { GameBoardState, GwentCard, GwentCardState, Player } from "../types";
 import handleBothFolded from "./handle_both_folded";
 import { changeTurn } from "./changeTurn";
-import { getCardName } from "../assets/utils.helper";
+import { calcValueOfCardsInRow, getCardName } from "../assets/utils.helper";
 
 const playCardResponse = Variant({
     Ok: text,
@@ -55,8 +55,13 @@ const play_card = update([text, text, nat32],
             }
         } else if (playedCard.ability !== "spy") {
 
+            if (playedCard.ability === "horn") player.units[
+                rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
+            ][0] = true;
+
             if (playedCard.ability === "brotherhood") {
                 const brotherhoodCards: GwentCard[] = [];
+                brotherhoodCards.push(playedCard);
                 const playedCardName = getCardName(playedCard)
 
                 const addBrotherhoodCards = (cardList: GwentCard[], playedCardName: string) => {
@@ -73,7 +78,6 @@ const play_card = update([text, text, nat32],
                 player.nondrawed = addBrotherhoodCards(player.nondrawed, playedCardName);
                 player.pickable = addBrotherhoodCards(player.pickable, playedCardName);
                 brotherhoodCards.forEach(card => player.units[rowNameToIndex(card.row)][1].push(card));
-                console.log(brotherhoodCards)
 
             } else {
                 player.units[
@@ -95,6 +99,19 @@ const play_card = update([text, text, nat32],
         if (player.isFolded && opponent.isFolded) handleBothFolded(gameKey);
         gameBoardStore.insert(gameKey, game);
         changeTurn(gameKey);
+
+        const calcStrenghOfCards: [
+            [GwentCardState[], GwentCardState[], GwentCardState[]], [GwentCardState[], GwentCardState[], GwentCardState[]]
+        ] = [[[], [], []], [[], [], []]]
+
+        calcStrenghOfCards[0][0] = calcValueOfCardsInRow(player.units[0], game.weatherEffectRow, "melee");
+        calcStrenghOfCards[0][1] = calcValueOfCardsInRow(player.units[1], game.weatherEffectRow, "ranged");
+        calcStrenghOfCards[0][2] = calcValueOfCardsInRow(player.units[2], game.weatherEffectRow, "siege");
+        calcStrenghOfCards[1][0] = calcValueOfCardsInRow(opponent.units[0], game.weatherEffectRow, "melee");
+        calcStrenghOfCards[1][1] = calcValueOfCardsInRow(opponent.units[1], game.weatherEffectRow, "ranged");
+        calcStrenghOfCards[1][2] = calcValueOfCardsInRow(opponent.units[2], game.weatherEffectRow, "siege");
+
+        console.log(calcStrenghOfCards)
 
         return { Ok: "Card played." };
     }

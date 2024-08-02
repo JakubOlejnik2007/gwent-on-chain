@@ -53,9 +53,9 @@ const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex,
         let effect = ""
 
         weatherEffects.forEach(weatherEffect => {
-            if (weatherEffect.row === "melee" && ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent"))) effect = " bg-[url('/blizzard.gif')]";
-            if (weatherEffect.row === "ranged" && rowIndex === 1) effect = " bg-[url('/fog.gif')]";
-            if (weatherEffect.row === "siege" && ((rowIndex === 2 && site === "me") || (rowIndex === 0 && site === "opponent"))) effect = " bg-[url('/rain.gif')]";
+            if (weatherEffect.row === "melee" && ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent"))) effect = " bg-[url('/snow.png')]";
+            if (weatherEffect.row === "ranged" && rowIndex === 1) effect = " bg-[url('/fog.png')]";
+            if (weatherEffect.row === "siege" && ((rowIndex === 2 && site === "me") || (rowIndex === 0 && site === "opponent"))) effect = " bg-[url('/rain.png')]";
         })
 
         return effect;
@@ -112,7 +112,7 @@ const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex,
     return <>
         <Pill className={colorPallete.pill}><p className={colorPallete.pillParagraph}>{sumFromRow}</p></Pill>
         <div className="grid grid-cols-[80px_1fr]">
-            {isHorn ? <img className="w-20" src={"/cards/neutral/n_rog.png"} alt={"/cards/neutral/n_rog.png".split("/")[3].split(".")[0]} /> : <div />}
+            {isHorn ? <img className="w-full h-32 flex justify-center bg-cover bg-center" src={"/cards/neutral/n_rog.png"} alt={"/cards/neutral/n_rog.png".split("/")[3].split(".")[0]} /> : <div />}
             <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "") + weatherEffect}
                 onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, row) : () => { }}
             >

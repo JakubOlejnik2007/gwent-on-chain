@@ -94,7 +94,7 @@ export const neutralCards: GwentCard[] = [
         row: "melee",
         imageUrl: "/cards/neutral/n_jaskier.png",
         baseStrength: 2,
-        isHero: true,
+        isHero: false,
         isWeather: false,
         ability: "horn"
     },
@@ -1015,7 +1015,7 @@ export const monstersCards: GwentCard[] = [
     },
     {
         row: "siege",
-        imageUrl: "/cards/monsters/m_krabopajak_olbrzymi.png",
+        imageUrl: "/cards/monsters/m_krabopajak4.png",
         baseStrength: 6,
         isHero: false,
         isWeather: false,
