@@ -104,7 +104,7 @@ const Game = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     <UserProfileGame player={data.myData} showReadiness={showReadiness} />
-                    {data.myData.ready && data.opponentData.ready &&
+                    {data.myData.ready && data.opponentData.ready && data.whichPlayerTurn === data.myData.name &&
                         <Button
                             icon={faFlag}
                             onClick={fold}

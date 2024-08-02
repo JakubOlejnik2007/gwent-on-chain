@@ -52,7 +52,7 @@ const UserProfileGame = ({ player, showReadiness }: UserProfileGameProps) => {
                 </div>}
                 {showReadiness && <div className="flex justify-between">
                     <div className={"w-10 h-10 rounded-full " + (points > 1 ? "bg-red-600" : "text-zinc-400")}></div>
-                    <div className="w-10 h-10 bg-red-600 rounded-full"></div>
+                    <div className={"w-10 h-10 rounded-full " + (points > 0 ? "bg-red-600" : "text-zinc-400")}></div>
                 </div>}
             </div>
         </div >

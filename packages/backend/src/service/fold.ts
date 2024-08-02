@@ -1,6 +1,7 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
 import handleBothFolded from "./handle_both_folded";
+import { changeTurn } from "./changeTurn";
 
 const foldResponse = Variant({
     Ok: text,
@@ -31,9 +32,9 @@ const fold = update([text],
         } else {
             return { Err: "Address not found in this game" };
         }
-
+        game.whichPlayerTurn = (game.whichPlayerTurn === player1.name ? player2 : player1).name;
+        gameBoardStore.insert(gameKey, game);
         if (player1.isFolded && player2.isFolded) handleBothFolded(gameKey);
-
         return { Ok: "Player folded" };
     }
 );
