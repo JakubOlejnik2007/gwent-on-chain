@@ -11,6 +11,10 @@ export type GwentCard = {
     ability: GwentCardAbility,
 }
 
+export interface GwentCardState extends GwentCard {
+    calculatedStrength: number;
+}
+
 export interface Player {
     address: string,
     name: string,

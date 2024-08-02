@@ -3,6 +3,7 @@ import gameBoardStore from "../game_board_store";
 import { GameBoardState, GwentCard, Player } from "../types";
 import handleBothFolded from "./handle_both_folded";
 import { changeTurn } from "./changeTurn";
+import { getCardName } from "../assets/utils.helper";
 
 const playCardResponse = Variant({
     Ok: text,
@@ -10,11 +11,6 @@ const playCardResponse = Variant({
 });
 
 const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2
-
-const getCardName = ((card: GwentCard) => {
-    let cardName = card.imageUrl.split("/")[3].split(".")[0];
-    return cardName.substring(0, cardName.length - 1);
-})
 
 const play_card = update([text, text, nat32],
     playCardResponse,

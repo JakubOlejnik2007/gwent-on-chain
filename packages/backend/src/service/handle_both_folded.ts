@@ -1,9 +1,13 @@
+import { getCardName } from "../assets/utils.helper";
 import gameBoardStore from "../game_board_store";
-import { GameBoardState, Player } from "../types";
+import { GameBoardState, GwentCard, GwentRow, Player } from "../types";
+
+
 
 const calcSumOfPlayer = (player: Player): number => {
     return player.units.reduce((acc1, row) => acc1 + row[1].reduce((acc2, card) => acc2 + card.baseStrength, 0), 0);
 }
+
 
 const handleBothFolded = (gameKey: string) => {
     const game = gameBoardStore.get(gameKey).Some as GameBoardState;
