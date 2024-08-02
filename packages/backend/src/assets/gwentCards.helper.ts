@@ -883,7 +883,7 @@ export const nilfgaardCards: GwentCard[] = [
         ability: null
     }
 ] as const;
-export const montersCards: GwentCard[] = [
+export const monstersCards: GwentCard[] = [
     ...neutralCards,
     {
         row: "melee",
