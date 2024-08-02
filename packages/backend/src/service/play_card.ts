@@ -1,6 +1,6 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
-import { GameBoardState, Player } from "../types";
+import { GameBoardState, GwentCard, Player } from "../types";
 import handleBothFolded from "./handle_both_folded";
 import { changeTurn } from "./changeTurn";
 
@@ -8,6 +8,13 @@ const playCardResponse = Variant({
     Ok: text,
     Err: text,
 });
+
+const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2
+
+const getCardName = ((card: GwentCard) => {
+    let cardName = card.imageUrl.split("/")[3].split(".")[0];
+    return cardName.substring(0, cardName.length - 1);
+})
 
 const play_card = update([text, text, nat32],
     playCardResponse,
@@ -41,8 +48,7 @@ const play_card = update([text, text, nat32],
 
         if (playedCard.row === "every" && playedCard.ability === "horn") {
             player.units[
-                cardRow === "melee" ? 0 :
-                    cardRow === "ranged" ? 1 : 2
+                rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
             ][0] = true;
         }
         else if (playedCard.isWeather) {
@@ -52,10 +58,32 @@ const play_card = update([text, text, nat32],
                 game.weatherEffectRow = [...new Set(game.weatherEffectRow)];
             }
         } else if (playedCard.ability !== "spy") {
-            player.units[
-                cardRow === "melee" ? 0 :
-                    cardRow === "ranged" ? 1 : 2
-            ][1].push(playedCard);
+
+            if (playedCard.ability === "brotherhood") {
+                const brotherhoodCards: GwentCard[] = [];
+                const playedCardName = getCardName(playedCard)
+
+                const addBrotherhoodCards = (cardList: GwentCard[], playedCardName: string) => {
+                    return cardList.filter(card => {
+                        const cardName = getCardName(card);
+                        if (cardName === playedCardName) {
+                            brotherhoodCards.push(card);
+                            return false;
+                        }
+                        return true;
+                    });
+                };
+
+                player.nondrawed = addBrotherhoodCards(player.nondrawed, playedCardName);
+                player.pickable = addBrotherhoodCards(player.pickable, playedCardName);
+                brotherhoodCards.forEach(card => player.units[rowNameToIndex(card.row)][1].push(card));
+                console.log(brotherhoodCards)
+
+            } else {
+                player.units[
+                    rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
+                ][1].push(playedCard);
+            }
         } else {
             for (let i = 0; i < 2; i++) {
                 const card = player.pickable[Math.floor(Math.random() * player.pickable.length)];
@@ -63,8 +91,7 @@ const play_card = update([text, text, nat32],
                 player.pickable = player.pickable.filter(c => c !== card);
             }
             opponent.units[
-                cardRow === "melee" ? 0 :
-                    cardRow === "ranged" ? 1 : 2
+                rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
             ][1].push(playedCard);
         }
 
