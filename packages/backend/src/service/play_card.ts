@@ -10,7 +10,8 @@ const playCardResponse = Variant({
     Err: text,
 });
 
-const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2
+const rowNameToIndex = (row: "melee" | "ranged" | "siege" | "every"): 0 | 1 | 2 => row === "melee" ? 0 : row === "ranged" ? 1 : 2;
+const rowIndexToName = (index: 0 | 1 | 2): "melee" | "ranged" | "siege" => index === 0 ? "melee" : index === 1 ? "ranged" : "siege";
 
 const play_card = update([text, text, nat32],
     playCardResponse,
@@ -46,6 +47,57 @@ const play_card = update([text, text, nat32],
             player.units[
                 rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
             ][0] = true;
+        }
+        else if (playedCard.ability === "purge") {
+            const calcStrenghOfCards: [
+                [GwentCardState[], GwentCardState[], GwentCardState[]], [GwentCardState[], GwentCardState[], GwentCardState[]]
+            ] = [[[], [], []], [[], [], []]]
+
+            let maxValueOfCard: number = 0;
+            if (playedCard.row === "every") {
+                for (let i = 0; i < 2; i++)
+                    for (let j = 0; j < 3; j++) {
+                        calcStrenghOfCards[i][j] = calcValueOfCardsInRow((game.players[i] as Player).units[j], game.weatherEffectRow, rowIndexToName(j as 0 | 1 | 2));
+                        calcStrenghOfCards[i][j].forEach(card => card.calculatedStrength > maxValueOfCard && !card.isHero ? maxValueOfCard = card.calculatedStrength : "");
+                    }
+
+                for (let i = 0; i < 2; i++) {
+                    const player = (game.players[i] as Player)
+                    for (let j = 0; j < 3; j++) {
+                        const indiciesToRemove: number[] = []
+                        calcStrenghOfCards[i][j].forEach((card, index) => card.calculatedStrength === maxValueOfCard ? indiciesToRemove.push(index) : "");
+
+                        indiciesToRemove.sort((a, b) => b - a).forEach(index => {
+                            if (!player.units[j][1][index].isHero) {
+                                const removedCard = player.units[j][1].splice(index, 1)[0];
+                                player.rejected.push(removedCard);
+                            }
+                        })
+
+                    }
+                }
+            } else {
+                const opponentRowCalc = calcValueOfCardsInRow(opponent.units[rowNameToIndex(playedCard.row)], game.weatherEffectRow, playedCard.row);
+                const sumOfRow = opponentRowCalc.reduce((sum, card) => {
+                    if (card.calculatedStrength > maxValueOfCard && !card.isHero) maxValueOfCard = card.calculatedStrength;
+                    return sum + card.calculatedStrength
+                }, 0);
+                if (sumOfRow >= 10) {
+                    const indiciesToRemove: number[] = []
+                    opponentRowCalc.forEach((card, index) => card.calculatedStrength === maxValueOfCard ? indiciesToRemove.push(index) : "");
+
+                    indiciesToRemove.sort((a, b) => b - a).forEach(index => {
+                        if (!opponent.units[rowNameToIndex(playedCard.row)][1][index].isHero) {
+                            const removedCard = opponent.units[rowNameToIndex(playedCard.row)][1].splice(index, 1)[0];
+                            opponent.rejected.push(removedCard);
+                        }
+                    })
+                }
+            }
+
+
+
+
         }
         else if (playedCard.isWeather) {
             if (playedCard.row === "every") game.weatherEffectRow = [];
