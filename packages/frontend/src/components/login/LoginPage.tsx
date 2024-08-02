@@ -51,6 +51,7 @@ export default function LoginPage(): React.ReactElement {
     <div className="flex flex-col items-center justify-center w-full h-screen gap-10">
       <div className="flex items-center justify-center gap-5 md:gap-20">
         <img alt="ic" className="w-20 h-20 md:w-28 md:h-28" src="/ic.svg" />
+        <img alt="gwent on chain" className="w-20 md:w-28 md:h-28" src="/gwent_logo_svg.svg" />
         <img
           alt="react"
           className="w-20 h-20 md:w-28 md:h-28"
@@ -59,7 +60,7 @@ export default function LoginPage(): React.ReactElement {
         <img alt="siwe" className="w-20 h-20 md:w-28 md:h-28" src="/siwe.svg" />
       </div>
       <div className="px-10 font-bold text-center">
-        <p className="text-2xl md:text-5xl">GWINT na blockchain</p>
+        <p className="text-2xl md:text-5xl">GWENTonCHAIN</p>
         <p className="text-l md:text-2xl">Użyj portfela Ethereum aby zalogować się do gry!</p>
       </div>
       <div className="w-80 md:w-96 border-zinc-700/50 border-[1px] bg-zinc-900 drop-shadow-xl rounded-3xl flex flex-col items-center py-5 mt-8 px-5 mx-10">
