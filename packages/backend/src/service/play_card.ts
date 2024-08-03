@@ -40,7 +40,7 @@ const play_card = update([text, text, nat32, text],
         const playedCard = player.nondrawed[cardIndex];
         playedCard.row = cardRow as GwentRow;
         game.lastPlayedCard = playedCard;
-        player.nondrawed = player.nondrawed.filter(card => card.imageUrl !== playedCard.imageUrl)
+        player.nondrawed = player.nondrawed.splice(cardIndex, 1);
 
         if (playedCard.row === "every" && playedCard.ability === "horn") {
             player.units[
