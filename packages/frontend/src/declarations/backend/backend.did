@@ -11,6 +11,6 @@ service : (principal) -> {
     list_all_games : () -> (variant { Ok : vec text; Err : text }) query;
     list_games_for_user : (text) -> (variant { Ok : vec text; Err : text }) query;
     list_profiles : () -> (variant { Ok : vec record { text; record { avatar_url : text; name : text; address : text } }; Err : text }) query;
-    play_card : (text, text, nat32) -> (variant { Ok : text; Err : text });
+    play_card : (text, text, nat32, text) -> (variant { Ok : text; Err : text });
     save_my_profile : (text, text) -> (variant { Ok : record { avatar_url : text; name : text; address : text }; Err : text });
 };

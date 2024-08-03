@@ -18,7 +18,7 @@ type DisplayRowProps = {
     site: "opponent" | "me",
     selectedCardIndex: number | null,
     weatherEffects: GwentCard[],
-    handlePlayCard: (selectedCardIndex: number, row: string) => void
+    handlePlayCard: (selectedCardIndex: number, row: string, dummyIndex?: number) => void
 }
 
 const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard, weatherEffects }: DisplayRowProps) => {
@@ -114,11 +114,13 @@ const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex,
         <div className="grid grid-cols-[80px_1fr]">
             {isHorn ? <img className="w-full h-32 flex justify-center bg-cover bg-center" src={"/cards/neutral/n_rog.png"} alt={"/cards/neutral/n_rog.png".split("/")[3].split(".")[0]} /> : <div />}
             <div className={colorPallete.row + (isSelectedCardPlacable ? " border-[3px] border-yellow-300 rounded-xl border-collapse" : "") + weatherEffect}
-                onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, row) : () => { }}
+                onClick={isSelectedCardPlacable && selectedCardIndex !== null && data.myData?.nondrawed[selectedCardIndex].ability !== "dummy" ? () => handlePlayCard(selectedCardIndex, row) : undefined}
             >
                 {cards.map((card, colIndex) => {
                     return (
-                        <img key={colIndex} className={colorPallete.cardImage} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />
+                        <img key={colIndex} className={colorPallete.cardImage} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]}
+                            onClick={isSelectedCardPlacable && selectedCardIndex !== null ? () => handlePlayCard(selectedCardIndex, row, colIndex) : undefined}
+                        />
                     )
                 })}
             </div >
@@ -139,10 +141,11 @@ const GameBoard = () => {
 
     const { myData, opponentData } = data;
 
-    const handlePlayCard = async (selectedCardIndex: number, row: string) => {
+    const handlePlayCard = async (selectedCardIndex: number, row: string, dummyIndex?: number) => {
         try {
+            console.log(dummyIndex);
             toast.success("Wysłano zagraną kartę");
-            const response = await actor.play_card(data.GameKey, row, selectedCardIndex);
+            const response = await actor.play_card(data.GameKey, row, selectedCardIndex, dummyIndex !== undefined ? `${dummyIndex}` : "null");
             if ("Err" in response) throw new Error(response.Err);
             if ("Ok" in response) console.log(response.Ok);
             toast.success("Wysłano kartę!");

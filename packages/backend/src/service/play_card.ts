@@ -1,6 +1,6 @@
 import { ic, nat32, text, update, Variant } from "azle";
 import gameBoardStore from "../game_board_store";
-import { GameBoardState, GwentCard, GwentCardState, Player } from "../types";
+import { GameBoardState, GwentCard, GwentCardState, GwentRow, Player } from "../types";
 import handleBothFolded from "./handle_both_folded";
 import { changeTurn } from "./changeTurn";
 import { calcValueOfCardsInRow, getCardName, rowIndexToName, rowNameToIndex } from "../assets/utils.helper";
@@ -10,9 +10,9 @@ const playCardResponse = Variant({
     Err: text,
 });
 
-const play_card = update([text, text, nat32],
+const play_card = update([text, text, nat32, text],
     playCardResponse,
-    (gameKey: string, cardRow: string, cardIndex: number): typeof playCardResponse.tsType => {
+    (gameKey: string, cardRow: string, cardIndex: number, addInfo: string): typeof playCardResponse.tsType => {
         const address = ic.caller().toString();
         const gameOption = gameBoardStore.get(gameKey);
 
@@ -44,6 +44,11 @@ const play_card = update([text, text, nat32],
             player.units[
                 rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
             ][0] = true;
+        }
+        else if (playedCard.ability === "dummy") {
+            const cardReplaced = player.units[rowNameToIndex(cardRow as GwentRow)][1][parseInt(addInfo)];
+            player.units[rowNameToIndex(cardRow as GwentRow)][1][parseInt(addInfo)] = playedCard;
+            player.nondrawed.push(cardReplaced);
         }
         else if (playedCard.ability === "purge") {
             const calcStrenghOfCards: [
@@ -91,10 +96,6 @@ const play_card = update([text, text, nat32],
                     })
                 }
             }
-
-
-
-
         }
         else if (playedCard.isWeather) {
             if (playedCard.row === "every") game.weatherEffectRow = [];

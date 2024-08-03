@@ -65,7 +65,7 @@ export interface _SERVICE {
     { 'Err': string }
   >,
   'play_card': ActorMethod<
-    [string, string, number],
+    [string, string, number, string],
     { 'Ok': string } |
     { 'Err': string }
   >,

@@ -139,7 +139,7 @@ export const idlFactory = ({ IDL }) => {
     ),
 
     'play_card': IDL.Func(
-      [IDL.Text, IDL.Text, IDL.Nat32],
+      [IDL.Text, IDL.Text, IDL.Nat32, IDL.Text],
       [
         IDL.Variant({
           'Ok': IDL.Text,
