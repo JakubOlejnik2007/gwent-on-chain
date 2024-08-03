@@ -38,6 +38,7 @@ const play_card = update([text, text, nat32, text],
         if (player.name !== game.whichPlayerTurn) return { Err: "Not your turn" };
 
         const playedCard = player.nondrawed[cardIndex];
+        game.lastPlayedCard = playedCard;
         player.nondrawed = player.nondrawed.filter(card => card.imageUrl !== playedCard.imageUrl)
 
         if (playedCard.row === "every" && playedCard.ability === "horn") {

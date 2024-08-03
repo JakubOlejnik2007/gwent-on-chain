@@ -26,6 +26,7 @@ export type GameMetaContextData = {
     myData: MyData | undefined;
     whichPlayerTurn: string | null;
     weatherEffectRow: GwentCard[];
+    lastPlayedCard: GwentCard | null;
 }
 
 export type GameMetaContextType = {
