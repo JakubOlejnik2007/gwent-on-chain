@@ -7,6 +7,7 @@ GWENTonCHAIN is a card game inspired by the popular Gwent from the Witcher serie
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies](#technologies)
+- [Credits](#credits)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -30,6 +31,10 @@ Gwent-on-chain is a blockchain-based card game that allows players to engage in 
   - [Tailwind](https://tailwindcss.com/)
   - [Internet Computer](https://internetcomputer.org/)
   - [ic-siwe](https://github.com/kristoferlund/ic-siwe-react-demo-ts)
+
+## Credits
+
+- [Gwent card images](https://wykop.pl/link/4269583/gwint-do-druku-w-polskiej-wersji)
 
 ## Contributing
 
@@ -56,6 +61,7 @@ GWENTonCHAIN to gra karciana inspirowana popularnym Gwintem z serii Wiedźmin. P
 - [Wprowadzenie](#wprowadzenie)
 - [Funkcje](#funkcje)
 - [Technologie](#technologie)
+- [Podziękowania](#podziękowania)
 - [Współpraca](#współpraca)
 - [Licencja](#licencja)
 
@@ -79,6 +85,10 @@ Gwent-on-chain to gra karciana oparta na blockchainie, która pozwala graczom na
   - [Tailwind](https://tailwindcss.com/)
   - [Internet Computer](https://internetcomputer.org/)
   - [ic-siwe](https://github.com/kristoferlund/ic-siwe-react-demo-ts)
+
+## Podziękowania
+
+- [Obrazki kart do Gwinta](https://wykop.pl/link/4269583/gwint-do-druku-w-polskiej-wersji)
 
 ## Współpraca
 
