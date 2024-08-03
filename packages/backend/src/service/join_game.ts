@@ -44,6 +44,7 @@ const join_game = update(
             cardsChanged: 0,
             points: 2,
             isFolded: false,
+            deck: null
         };
 
         game.players[1] = player;

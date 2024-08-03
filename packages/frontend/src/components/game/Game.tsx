@@ -121,6 +121,7 @@ const Game = () => {
                 </div>
             </div>
             {data.myData.ready && data.opponentData.ready && ((data.myData.points !== 0 && data.opponentData.points !== 0)) && <GameBoard />}
+            {data.myData.ready && !data.opponentData.ready && <p className="m-auto">Oczekiwanie na dobranie kart przez przeciwnika…</p>}
             {!data.myData.ready && data.myData.nondrawed.length === 0 && <SelectDeck />}
             {!data.myData.ready && !data.myData.ready && data.myData.nondrawed.length ?
                 <div className="w-full">

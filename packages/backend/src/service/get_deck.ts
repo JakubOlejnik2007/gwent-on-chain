@@ -1,7 +1,7 @@
 import { ic, text, update, Variant } from "azle";
 import { GwentCard, GwentDeck, Player } from "../types";
 import gameBoardStore from "../game_board_store";
-import { monstersCards, nilfgaardCards, northernRealmsCards } from "../assets/gwentCards.helper";
+import { monstersCards, nilfgaardCards, northernRealmsCards, scoiataelCards } from "../assets/gwentCards.helper";
 
 const isGwentDeck = (deck: string): deck is GwentDeck => ["Northern Realms", "Scoia'tael", "Monsters", "Nilfgaard"].includes(deck);
 
@@ -37,10 +37,13 @@ const get_deck = update([text, text],
         let cards: GwentCard[] = [];
         let selectedCards: GwentCard[] = [];
 
+        const player = game.players[playerIndex] as Player;
+
         switch (deck) {
             case "Northern Realms": cards = northernRealmsCards; break;
             case "Monsters": cards = monstersCards; break;
             case "Nilfgaard": cards = nilfgaardCards; break;
+            case "Scoia'tael": cards = scoiataelCards; break;
         }
 
         for (let i = 0; i < 10; i++) {
@@ -49,8 +52,10 @@ const get_deck = update([text, text],
             cards = cards.filter(c => c !== card);
         }
 
-        (game.players[playerIndex] as Player).pickable = cards;
-        (game.players[playerIndex] as Player).nondrawed = selectedCards;
+        player.deck = deck;
+
+        player.pickable = cards;
+        player.nondrawed = selectedCards;
         gameBoardStore.insert(gameKey, game);
         return { Ok: "Cards are chosen" };
     }

@@ -30,6 +30,7 @@ const create_game = update(
                     cardsChanged: 0,
                     points: 2,
                     isFolded: false,
+                    deck: null
                 },
                 null
             ],

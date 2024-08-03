@@ -28,6 +28,7 @@ export interface Player {
     cardsChanged: 0 | 1 | 2;
     points: 2 | 1 | 0;
     isFolded: boolean;
+    deck: GwentDeck | null;
 }
 
 export interface GameBoardState {
@@ -44,7 +45,8 @@ export interface PlayerData {
     commander: GwentCard | undefined,
     ready: boolean,
     points: 2 | 1 | 0,
-    isFolded: boolean
+    isFolded: boolean;
+    deck: GwentDeck | null;
 }
 
 export interface MyData extends PlayerData {

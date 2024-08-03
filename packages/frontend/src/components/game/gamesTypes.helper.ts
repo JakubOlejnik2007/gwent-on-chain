@@ -1,5 +1,7 @@
 import { GwentCard } from "../../assets/gwentTypes.helper";
 
+type GwentDeck = "Northern Realms" | "Scoia'tael" | "Monsters" | "Nilfgaard";
+
 export interface PlayerData {
     address: string | undefined,
     name: string | undefined,
@@ -8,7 +10,8 @@ export interface PlayerData {
     commander: GwentCard | undefined,
     ready: boolean,
     points: 2 | 1 | 0,
-    isFolded: boolean
+    isFolded: boolean,
+    deck: GwentDeck | null
 }
 
 export interface MyData extends PlayerData {
