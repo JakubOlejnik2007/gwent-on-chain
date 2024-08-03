@@ -1,4 +1,4 @@
-import { calcValueOfCardsInRow, getCardName, rowIndexToName } from "../assets/utils.helper";
+import { calcValueOfCardsInRow, getCardName, rowIndexToName, rowNameToIndex } from "../assets/utils.helper";
 import gameBoardStore from "../game_board_store";
 import { GameBoardState, GwentCard, GwentCardState, GwentRow, Player } from "../types";
 
@@ -27,22 +27,46 @@ const handleBothFolded = (gameKey: string) => {
 
     if (sumOfPlayer1 > sumOfPlayer2) {
         player2.points--;
+
+        if (player1.deck === "Northern Realms") player1.nondrawed.push(player1.pickable[Math.floor(Math.random() * player1.pickable.length)])
+
     } else if (sumOfPlayer1 < sumOfPlayer2) {
         player1.points--;
+
+        if (player2.deck === "Northern Realms") player2.nondrawed.push(player2.pickable[Math.floor(Math.random() * player2.pickable.length)])
     } else {
+        if (player1.deck !== player2.deck) {
+            if (player1.deck === "Nilfgaard") player1.points++;
+            if (player2.deck === "Nilfgaard") player2.points++;
+        }
+
         player1.points--;
         player2.points--;
     }
 
+    const rejectedCardsPlayer1 = [...player1.units[0][1], ...player1.units[1][1], ...player1.units[2][1]];
+    const rejectedCardsPlayer2 = [...player2.units[0][1], ...player2.units[1][1], ...player2.units[2][1]];
 
     player1.isFolded = false;
     player2.isFolded = false;
 
-    player1.rejected.push(...player1.units[0][1], ...player1.units[1][1], ...player1.units[2][1]);
-    player2.rejected.push(...player2.units[0][1], ...player2.units[1][1], ...player2.units[2][1]);
+    player1.rejected.push(...rejectedCardsPlayer1);
+    player2.rejected.push(...rejectedCardsPlayer2);
 
     player1.units = [[false, []], [false, []], [false, []]];
     player2.units = [[false, []], [false, []], [false, []]];
+
+    if (player1.deck === "Monsters") {
+        const rejectedCardsWithoutHeros = rejectedCardsPlayer1.filter(c => !c.isHero);
+        const randomCard = rejectedCardsWithoutHeros[Math.floor(Math.random() * rejectedCardsWithoutHeros.length)]
+        player1.units[rowNameToIndex(randomCard.row)][1].push(randomCard)
+    }
+
+    if (player2.deck === "Monsters") {
+        const rejectedCardsWithoutHeros = rejectedCardsPlayer2.filter(c => !c.isHero);
+        const randomCard = rejectedCardsWithoutHeros[Math.floor(Math.random() * rejectedCardsWithoutHeros.length)]
+        player2.units[rowNameToIndex(randomCard.row)][1].push(randomCard)
+    }
 
     game.weatherEffectRow = [];
 
