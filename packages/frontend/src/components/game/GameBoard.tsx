@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { GameMetaContext } from "./GameMeta";
 import Pill from "../ui/Pill";
-import { GwentCard } from "../../assets/gwentTypes.helper";
-import { PlayerData } from "./gamesTypes.helper";
+import { GwentCard, GwentRow } from "../../assets/gwentTypes.helper";
 import { useActor } from "../../ic/Actors";
 import toast from "react-hot-toast";
+import { Dialog as HeadlessDialog } from "@headlessui/react";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type DisplayRowProps = {
     cardsRow: [boolean, GwentCard[]],
@@ -19,6 +21,11 @@ type DisplayRowProps = {
     selectedCardIndex: number | null,
     weatherEffects: GwentCard[],
     handlePlayCard: (selectedCardIndex: number, row: string, dummyIndex?: number) => void
+}
+
+const rowName = (rowIndex: number, site: "opponent" | "me"): string => {
+    return ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent")) ? "melee" :
+        rowIndex === 1 ? "ranged" : "siege";
 }
 
 const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex, handlePlayCard, weatherEffects }: DisplayRowProps) => {
@@ -61,10 +68,7 @@ const DisplayRow = ({ cardsRow, colorPallete, site, selectedCardIndex, rowIndex,
         return effect;
     }
 
-    const rowName = (rowIndex: number, site: "opponent" | "me"): string => {
-        return ((rowIndex === 0 && site === "me") || (rowIndex === 2 && site === "opponent")) ? "melee" :
-            rowIndex === 1 ? "ranged" : "siege";
-    }
+
 
     const row = rowName(rowIndex, site);
 
@@ -136,20 +140,36 @@ const GameBoard = () => {
 
     if (!actor) return null;
 
-    const [selectedCard, setSelectedCard] = React.useState<number | null>(null);
+    const [selectedCard, setSelectedCard] = useState<number | null>(null);
+    const [isResurrection, setIsResurrection] = useState<boolean>(false);
+
+    const [resurrectedCard, setResurrectedCard] = useState<GwentCard | null>(null);
+
     if (!data) return <></>;
 
     const { myData, opponentData } = data;
 
+    const handleSelectCard = (selectedCardIndex: number) => {
+        setResurrectedCard(null)
+
+        const card = myData?.nondrawed[selectedCardIndex] as GwentCard;
+
+        if (card.ability === "resurrection") setIsResurrection(true);
+
+        setSelectedCard(selectedCardIndex)
+    }
+
     const handlePlayCard = async (selectedCardIndex: number, row: string, dummyIndex?: number) => {
         try {
-            console.log(dummyIndex);
+
+
             toast.success("Wysłano zagraną kartę");
-            const response = await actor.play_card(data.GameKey, row, selectedCardIndex, dummyIndex !== undefined ? `${dummyIndex}` : "null");
+            const response = await actor.play_card(data.GameKey, row, selectedCardIndex, dummyIndex !== undefined ? `${dummyIndex}` : resurrectedCard !== null ? JSON.stringify(resurrectedCard) : "");
             if ("Err" in response) throw new Error(response.Err);
             if ("Ok" in response) console.log(response.Ok);
             toast.success("Wysłano kartę!");
             setSelectedCard(null);
+            setResurrectedCard(null);
         } catch (error) {
             toast.error("Błąd podczas gry!");
             console.error(error);
@@ -208,10 +228,38 @@ const GameBoard = () => {
             <div className="w-full flex justify-center pl-24">
                 {
                     myData.nondrawed.map((card, colIndex) => {
-                        return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => setSelectedCard(colIndex) : () => { }} key={colIndex} className={"w-24 -ml-16 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
+                        return <img onClick={data.whichPlayerTurn === data.myData?.name ? () => handleSelectCard(colIndex) : () => { }} key={colIndex} className={"w-24 -ml-16 " + (data.whichPlayerTurn === data.myData?.name ? " hover:z-10 hover:scale-105 hover:drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] duration-[76ms]" : "")} src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]} />;
                     })
                 }
-            </div></div>
+            </div>
+            <HeadlessDialog
+                className="fixed inset-0 z-10 overflow-y-auto"
+                onClose={() => { }}
+                open={isResurrection}
+            >
+                <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-[#00000070]">
+                    <HeadlessDialog.Panel className="max-w-xl">
+                        <div className="flex flex-col items-center w-full gap-5 py-8 md:px-8">
+                            <HeadlessDialog.Title>Wskrzeszanie</HeadlessDialog.Title>
+                            <p>Wybierz kartę do wskrzeszenia</p>
+                            <HeadlessDialog.Panel className="flex justify-center items-center gap-2">
+                                {myData.rejected.filter(c => !c.isHero).map((card, colIndex) =>
+                                    <img key={colIndex} className="w-32" src={card.imageUrl} alt={card.imageUrl.split("/")[3].split(".")[0]}
+                                        onClick={
+                                            () => {
+                                                console.log(card)
+                                                setResurrectedCard(card);
+                                                setIsResurrection(false);
+                                            }
+                                        }
+                                    />
+                                )}
+                            </HeadlessDialog.Panel>
+                        </div>
+                    </HeadlessDialog.Panel>
+                </div>
+            </HeadlessDialog>
+        </div>
     );
 }
 
