@@ -42,7 +42,6 @@ const GameMeta = () => {
                     console.log(JSON.parse(updatedData.Ok))
                     setData((prevData) => {
                         const newData = JSON.parse(updatedData.Ok)
-                        console.log(prevData?.lastPlayedCard, newData.lastPlayedCard)
                         if (
                             prevData?.lastPlayedCard !== null &&
                             prevData?.lastPlayedCard.imageUrl !== newData.lastPlayedCard.imageUrl
