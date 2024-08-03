@@ -88,7 +88,7 @@ const Game = () => {
                 icon={faCircleNotch}
                 disabled
                 spin
-            >Waiting for opponent to join</Button>
+            >Oczekiwanie na dołączenie przeciwnika…</Button>
             <Pill className="bg-zinc-900 p-3">Id gry: {data.GameKey}</Pill>
         </>
 
