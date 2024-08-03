@@ -135,6 +135,12 @@ const play_card = update([text, text, nat32, text],
                 player.units[
                     rowNameToIndex(cardRow as "melee" | "ranged" | "siege" | "every")
                 ][1].push(playedCard);
+                console.log(addInfo);
+                if (playedCard.ability === "resurrection") {
+                    const card = JSON.parse(addInfo) as GwentCard;
+                    player.units[rowNameToIndex(card.row)][1].push(card);
+                }
+
             }
         } else {
             for (let i = 0; i < 2; i++) {
