@@ -151,19 +151,6 @@ const play_card = update([text, text, nat32, text],
         gameBoardStore.insert(gameKey, game);
         changeTurn(gameKey);
 
-        const calcStrenghOfCards: [
-            [GwentCardState[], GwentCardState[], GwentCardState[]], [GwentCardState[], GwentCardState[], GwentCardState[]]
-        ] = [[[], [], []], [[], [], []]]
-
-        calcStrenghOfCards[0][0] = calcValueOfCardsInRow(player.units[0], game.weatherEffectRow, "melee");
-        calcStrenghOfCards[0][1] = calcValueOfCardsInRow(player.units[1], game.weatherEffectRow, "ranged");
-        calcStrenghOfCards[0][2] = calcValueOfCardsInRow(player.units[2], game.weatherEffectRow, "siege");
-        calcStrenghOfCards[1][0] = calcValueOfCardsInRow(opponent.units[0], game.weatherEffectRow, "melee");
-        calcStrenghOfCards[1][1] = calcValueOfCardsInRow(opponent.units[1], game.weatherEffectRow, "ranged");
-        calcStrenghOfCards[1][2] = calcValueOfCardsInRow(opponent.units[2], game.weatherEffectRow, "siege");
-
-        console.log(calcStrenghOfCards)
-
         return { Ok: "Card played." };
     }
 );
