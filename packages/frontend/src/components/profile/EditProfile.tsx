@@ -50,7 +50,7 @@ export default function EditProfile({
     return (
       <div className={className}>
         <div className="flex flex-col items-center w-full gap-5 h-72">
-          <div className="text-2xl font-bold">User Profile</div>
+          <div className="text-2xl font-bold">Profil użytkownika</div>
           <div className="flex flex-col items-center justify-center w-full h-full">
             <FontAwesomeIcon className="w-4 h-4" icon={faCircleNotch} spin />
           </div>
@@ -85,13 +85,13 @@ export default function EditProfile({
   return (
     <div className={className}>
       <div className="flex flex-col items-center w-full gap-5">
-        <div className="text-2xl font-bold">User Profile</div>
+        <div className="text-2xl font-bold">Profil użytkownika</div>
         <form
           className="flex flex-col items-center w-full gap-5"
           onSubmit={submit}
         >
           <div className="flex flex-col items-center w-full gap-3">
-            <label htmlFor="name">What do you want to be called?</label>
+            <label htmlFor="name">Jak chcesz się nazywać?</label>
             <input
               className="w-full px-3 py-2 leading-tight border rounded appearance-none text-zinc-500 focus:outline-none focus:bg-emerald-200 bg-slate-200"
               name="name"
@@ -102,7 +102,7 @@ export default function EditProfile({
             />
           </div>
           <div className="flex flex-col items-center w-full gap-3">
-            <label htmlFor="name">Paste a link to your avatar (optional)</label>
+            <label htmlFor="name">Wklej link do swojego zdjęcia profilowego (opcjonalnie)</label>
             <input
               className="w-full px-3 py-2 leading-tight border rounded appearance-none text-zinc-500 focus:outline-none focus:bg-emerald-200 bg-slate-200"
               name="avatar_url"
