@@ -39,8 +39,7 @@ export function NoProfileMessage() {
       <div className="flex flex-col items-center w-full gap-10 py-8 md:px-8">
         <div className="text-2xl font-bold">Welcome!</div>
         <div className="text-lg leading-loose text-center">
-          You are logged in and have established a one to one link between your
-          Ethereum address and your Internet Computer identity.
+          Jesteś zalogowy i połączyłeś się między adresem Ethereum a Internet Computer Identity.
         </div>
         <div>
           <AddressPill
@@ -56,7 +55,7 @@ export function NoProfileMessage() {
             principal={identity?.getPrincipal().toString()}
           />
         </div>
-        <div className="text-lg">Now, save your user profile!</div>
+        <div className="text-lg">Teraz zapisz swój profil</div>
       </div>
     </div>
   );
