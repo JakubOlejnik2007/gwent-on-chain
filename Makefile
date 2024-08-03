@@ -33,7 +33,7 @@ deploy-all-ic:
 
 	dfx deploy ic_siwe_provider --network ic --argument "( \
 	    record { \
-	        domain = \"127.0.0.1\"; \
+	        domain = \"https://ae5hp-hiaaa-aaaan-qmsbq-cai.icp0.io/\"; \
 	        uri = \"https://$$(dfx canister --network ic id frontend).icp0.io\"; \
 	        salt = \"somerandomsalt\"; \
 	        chain_id = opt 1; \
